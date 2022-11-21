@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class GuidanceReport extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'student_id',
+        'teacher_id',
+        'timetable_id',
+        'subject_id',
+        'report',
+    ];
 }

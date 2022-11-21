@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentDesiredSchool extends Model
+class Message extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'room_id',
+        'is_student',
+        'content',
+    ];
 }
