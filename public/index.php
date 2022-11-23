@@ -1,3 +1,6 @@
+<!-- アクセスすると、最初に表示されるのがここ -->
+
+
 <?php
 
 use Illuminate\Contracts\Http\Kernel;
@@ -31,6 +34,7 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
+// クラスをすべて読み込んでる
 require __DIR__.'/../vendor/autoload.php';
 
 /*
