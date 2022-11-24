@@ -34,7 +34,7 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
-// クラスをすべて読み込んでる
+// vender配下のライブラリをすべて自動的にロードできるように
 require __DIR__.'/../vendor/autoload.php';
 
 /*

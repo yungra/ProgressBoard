@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+// /route/web.phpを呼び出し、ルーティングのマップを定義するコード
+
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -18,6 +20,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    public const ADMIN_HOME = '/admin/dashboard';
+    public const TEACHER_HOME = '/teacher/dashboard';
+    public const STUDENT_HOME = '/student/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -35,6 +40,25 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            //prefix→urlのセット宇治をグループ化して設定
+            Route::prefix('admin')
+            ->as('admin.')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
+
+            Route::prefix('student')
+            ->as('student.')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/student.php'));
+
+            Route::prefix('teacher')
+            ->as('teacher.')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/teacher.php'));
         });
     }
 
