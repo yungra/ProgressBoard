@@ -20,6 +20,9 @@
                     <x-nav-link :href="route('admin.students.index')" :active="request()->routeIs('admin.students.index')">
                         生徒管理
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.teachers.index')" :active="request()->routeIs('admin.teachers.index')">
+                        講師管理
+                    </x-nav-link>
                 </div>
             </div>
 

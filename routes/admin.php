@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\Admin\TeachersController;
 
 
 /*
@@ -30,6 +31,9 @@ Route::get('/', function () {
 });
 
 Route::resource('students', StudentsController::class)
+->middleware('auth:admin');
+
+Route::resource('teachers', TeachersController::class)
 ->middleware('auth:admin');
 
 Route::get('/dashboard', function () {
