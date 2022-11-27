@@ -9,7 +9,10 @@ class Timetable extends Model
 {
     use HasFactory;
 
+    protected $table = 'your_table';
+
     protected $fillable = [
-        'name'
+        'name',
+        'day'
     ];
 }
