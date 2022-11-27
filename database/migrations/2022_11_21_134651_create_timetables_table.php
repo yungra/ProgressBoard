@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('timetables', function (Blueprint $table) {
             $table->id();
+            $table->string('day');
             $table->string('name');
-            $table->timestamps();
         });
     }
 
