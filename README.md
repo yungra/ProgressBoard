@@ -6,7 +6,8 @@
 - バグの修正の時はdevelopからhotfixブランチを切って開発を進める
   - hotfixブランチの規則はhotfix/issue番号
 
-##　ダウンロード方法
+## ダウンロード方法
+
 git clone https://github.com/yungra/ProgressBoard.git
 
 ## インストール方法
@@ -24,3 +25,17 @@ git clone https://github.com/yungra/ProgressBoard.git
 - DB_USERNAME=sail
 - DB_PASSWORD=password
 
+~/.zshrc
+に
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+を追記して、sailのエイリアスを作成します。
+
+その後に
+
+sail up
+
+でSailを起動して
+
+sail artisan migrate:fresh --seed
+
+と実行してください。（データベーステーブルとダミーデータが追加されればOK）
