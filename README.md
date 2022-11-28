@@ -13,3 +13,14 @@ git clone https://github.com/yungra/ProgressBoard.git
 - cd ProgressBoard
 - composer install
 
+.env.example をコピーして .envファイルを作成
+
+.envファイルの中の下記をご利用の環境に合わせて変更してください。
+
+- DB_CONNECTION=mysql
+- DB_HOST=127.0.0.1
+- DB_PORT=3306
+- DB_DATABASE=progressboard
+- DB_USERNAME=sail
+- DB_PASSWORD=password
+
