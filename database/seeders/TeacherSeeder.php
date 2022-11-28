@@ -30,8 +30,8 @@ class TeacherSeeder extends Seeder
             'name' => 'test5',
             'email' => 'test5@test.com',
             'password' => Hash::make('password123'),
-            'prefecture_id' => '26', //京都府
-            'cities_id' => '38', //右京区
+            'prefecture_id' => '46', //鹿児島県
+            'cities_id' => '1909', //中種子町
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
