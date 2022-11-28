@@ -26,9 +26,10 @@ class DatabaseSeeder extends Seeder
             PrefectureSeeder::class,
             CitiesSeeder::class,
             SubjectsSeeder::class,
-            TimetablesSeeder::class,
-            // StudentSeeder::class,
-            // TeacherSeeder::class,
+            TimetableSeeder::class,
+            SchoolSeeder::class,
+            StudentSeeder::class, // 開発用
+            TeacherSeeder::class, // 開発用
         ]);
     }
 }
