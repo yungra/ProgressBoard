@@ -5,3 +5,11 @@
   - featureブランチの規則はfeature/issue番号
 - バグの修正の時はdevelopからhotfixブランチを切って開発を進める
   - hotfixブランチの規則はhotfix/issue番号
+
+##　ダウンロード方法
+git clone https://github.com/yungra/ProgressBoard.git
+
+## インストール方法
+・cd ProgressBoard
+・composer install
+
