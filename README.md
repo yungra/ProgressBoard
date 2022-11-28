@@ -10,6 +10,6 @@
 git clone https://github.com/yungra/ProgressBoard.git
 
 ## インストール方法
--cd ProgressBoard
--composer install
+- cd ProgressBoard
+- composer install
 
