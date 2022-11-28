@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentsController extends Controller
 {
@@ -20,7 +21,8 @@ class StudentsController extends Controller
 
     public function index()
     {
-        dd('生徒一覧です');
+        $students = Student::select('name', 'email', 'created_at')->get();
+        return view('admin.students.index', compact('students'));
     }
 
     /**
@@ -30,7 +32,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.students.create');
     }
 
     /**

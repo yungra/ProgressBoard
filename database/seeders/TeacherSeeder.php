@@ -18,8 +18,8 @@ class TeacherSeeder extends Seeder
     {
         DB::table('teachers')->insert([
             [
-            'name' => 'test1',
-            'email' => 'test1@test.com',
+            'name' => 'test4',
+            'email' => 'test4@test.com',
             'password' => Hash::make('password123'),
             'prefecture_id' => '26', //京都府
             'cities_id' => '38', //右京区
@@ -27,8 +27,8 @@ class TeacherSeeder extends Seeder
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test2',
-            'email' => 'test2@test.com',
+            'name' => 'test5',
+            'email' => 'test5@test.com',
             'password' => Hash::make('password123'),
             'prefecture_id' => '26', //京都府
             'cities_id' => '38', //右京区
@@ -36,8 +36,8 @@ class TeacherSeeder extends Seeder
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test3',
-            'email' => 'test3@test.com',
+            'name' => 'test6',
+            'email' => 'test6@test.com',
             'password' => Hash::make('password123'),
             'prefecture_id' => '26', //京都府
             'cities_id' => '38', //右京区

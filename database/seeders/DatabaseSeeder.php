@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
             SubjectsSeeder::class,
             TimetableSeeder::class,
             SchoolSeeder::class,
-            StudentSeeder::class,
-            TeacherSeeder::class,
+            StudentSeeder::class, // 開発用
+            TeacherSeeder::class, // 開発用
         ]);
     }
 }
