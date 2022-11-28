@@ -36,6 +36,14 @@ sail up
 
 でSailを起動して
 
+sail artisan key:generate
+
+と入力してキーを生成します。
+
+その後、
+
 sail artisan migrate:fresh --seed
 
 と実行してください。（データベーステーブルとダミーデータが追加されればOK）
+
+これで表示確認してください。
