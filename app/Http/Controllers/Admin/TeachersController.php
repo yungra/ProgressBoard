@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
-
+use App\Models\Prefecture;
 class TeachersController extends Controller
 {
     /**
@@ -32,7 +32,8 @@ class TeachersController extends Controller
      */
     public function create()
     {
-        return view('admin.teachers.create');
+        $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
+        return view('admin.teachers.create', compact('prefectures'));
     }
 
     /**

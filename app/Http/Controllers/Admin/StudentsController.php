@@ -33,7 +33,8 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('admin.students.create');
+        $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
+        return view('admin.students.create', compact('prefectures'));
     }
 
     /**
