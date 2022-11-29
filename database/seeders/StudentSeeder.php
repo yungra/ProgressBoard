@@ -21,8 +21,7 @@ class StudentSeeder extends Seeder
                 'name' => 'test1',
                 'email' => 'test1@test.com',
                 'password' => Hash::make('password123'),
-                'prefecture_id' => '24', //三重県
-                'cities_id' => '7', //名張市
+                'city_id' => '7', //三重県名張市
                 'school_id' => '1',
                 'desired_school_id' => '2',
                 'created_at' => '2022/10/10 10:10:10'
@@ -31,8 +30,7 @@ class StudentSeeder extends Seeder
                 'name' => 'test2',
                 'email' => 'test2@test.com',
                 'password' => Hash::make('password123'),
-                'prefecture_id' => '26', //京都府
-                'cities_id' => '42', //福知山市
+                'city_id' => '42', //京都府福知山市
                 'school_id' => '1',
                 'desired_school_id' => '2',
                 'created_at' => '2022/10/10 10:10:10'
@@ -40,8 +38,7 @@ class StudentSeeder extends Seeder
                 'name' => 'test3',
                 'email' => 'test3@test.com',
                 'password' => Hash::make('password123'),
-                'prefecture_id' => '24', //三重県
-                'cities_id' => '7', //名張市
+                'city_id' => '7', //三重県名張市
                 'school_id' => '1',
                 'desired_school_id' => '2',
                 'created_at' => '2022/10/10 10:10:10'

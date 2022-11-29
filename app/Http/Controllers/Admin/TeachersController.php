@@ -21,8 +21,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = teacher::with('prefecture.cities')
-        ->get();
+        $teachers = Teacher::with('address.prefecture')->get();
         return view('admin.teachers.index', compact('teachers'));
     }
 

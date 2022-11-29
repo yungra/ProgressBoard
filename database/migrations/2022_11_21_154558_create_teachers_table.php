@@ -19,11 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('prefecture_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->foreignId('cities_id')
+            $table->foreignId('city_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

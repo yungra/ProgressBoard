@@ -36,11 +36,7 @@
                                         <tr>
                                             <td class="px-4 py-3">{{ $student->name }}</td>
                                             <td class="px-4 py-3">{{ $student->email }}</td>
-                                            @foreach ($student->prefecture->cities as $city)
-                                            @if ($city->id == $student->cities_id)
-                                                <td class="px-4 py-3">{{ $student->prefecture->name }}{{ $city->name }}</td>
-                                                @endif
-                                            @endforeach
+                                            <td class="px-4 py-3">{{ $student->address->prefecture->name}}{{ $student->address->name }}</td>
                                             <td class="px-4 py-3">{{ $student->created_at }}</td>
                                             <td class="w-10 text-center">
                                                 <input name="plan" type="radio">
