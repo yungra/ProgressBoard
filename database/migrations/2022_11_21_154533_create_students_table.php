@@ -20,11 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('prefecture_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->foreignId('cities_id')
+            $table->foreignId('city_id')
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

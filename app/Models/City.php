@@ -12,4 +12,12 @@ class City extends Model
     public function prefecture(){
         return $this->belongsTo(Prefecture::class);
     }
+
+    public function students(){
+        return $this->hasMany(Student::class);
+    }
+
+    public function teachers(){
+        return $this->hasMany(Teacher::class);
+    }
 }

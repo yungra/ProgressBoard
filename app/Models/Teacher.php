@@ -10,16 +10,16 @@ class Teacher extends Authenticatable
 {
     use HasFactory;
 
-    public function prefecture(){
-        return $this->belongsTo(Prefecture::class);
+    public function address()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     protected $fillable = [
         'name',
         'email',
         'password',
-        'prefecture_id',
-        'region_id',
+        'city_id',
         'university_id',
     ];
 

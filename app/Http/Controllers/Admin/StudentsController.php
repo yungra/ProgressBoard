@@ -24,8 +24,7 @@ class StudentsController extends Controller
 
     public function index()
     {
-        $students = Student::with('prefecture.cities')
-        ->get();
+        $students = Student::with('address.prefecture')->get();
         return view('admin.students.index', compact('students'));
     }
 
