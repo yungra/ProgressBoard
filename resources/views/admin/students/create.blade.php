@@ -31,6 +31,49 @@
                                   <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                               </div>
+
+                              <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                  <label for="address" class="leading-7 text-sm text-gray-600">住所</label>
+                                  <select name="address" id="address" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    @foreach($prefectures as $prefecture)
+                                     <optgroup label="{{ $prefecture->name }}">
+                                      @foreach($prefecture->cities as $city)
+                                        <option value="{{ $city->id}}" >
+                                         {{ $city->name }}
+                                        </option>
+                                      @endforeach
+                                    @endforeach
+                                   </select>    
+                                </div>
+                              </div>
+
+                              <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                  <label for="school" class="leading-7 text-sm text-gray-600">学校</label>
+                                  <select name="school" id="school" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    @foreach($schools as $school)
+                                        <option value="{{ $school->id}}" >
+                                         {{ $school->name }}
+                                        </option>
+                                    @endforeach
+                                   </select>    
+                                </div>
+                              </div>
+
+                              <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                  <label for="desired_school" class="leading-7 text-sm text-gray-600">志望校</label>
+                                  <select name="desired_school" id="desired_school" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    @foreach($schools as $desired_school)
+                                        <option value="{{ $desired_school->id}}" >
+                                         {{ $desired_school->name }}
+                                        </option>
+                                    @endforeach
+                                   </select>    
+                                </div>
+                              </div>
+
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                   <label for="password" required class="leading-7 text-sm text-gray-600">パスワード</label>
