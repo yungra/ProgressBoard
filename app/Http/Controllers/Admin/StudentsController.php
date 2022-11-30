@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Prefecture;
 use Illuminate\Support\Facades\Hash;
 
 class StudentsController extends Controller
@@ -18,11 +19,12 @@ class StudentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+        
     }
 
     public function index()
     {
-        $students = Student::select('name', 'email', 'created_at')->get();
+        $students = Student::with('address.prefecture')->get();
         return view('admin.students.index', compact('students'));
     }
 

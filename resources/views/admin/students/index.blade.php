@@ -26,6 +26,7 @@
                                         <tr>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">名前</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
+                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">住所</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
                                             <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                         </tr>
@@ -35,6 +36,7 @@
                                         <tr>
                                             <td class="px-4 py-3">{{ $student->name }}</td>
                                             <td class="px-4 py-3">{{ $student->email }}</td>
+                                            <td class="px-4 py-3">{{ $student->address->prefecture->name}}{{ $student->address->name }}</td>
                                             <td class="px-4 py-3">{{ $student->created_at }}</td>
                                             <td class="w-10 text-center">
                                                 <input name="plan" type="radio">
