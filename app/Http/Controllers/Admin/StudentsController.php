@@ -54,12 +54,13 @@ class StudentsController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
-        // dd($request->school);
+        // dd($request);
         Student::create([
             'name' => $request->name,
             'email' => $request->email,
             'city_id' => $request->address,
-            'shool_id' => $request->school,
+            'school_id' => $request->school,
+            'desired_school_id' => $request->desired_school,
             'password' => Hash::make($request->password),
         ]);
 

@@ -23,10 +23,10 @@ class Student extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
         'city_id',
         'school_id',
         'desired_school_id',
+        'password',
     ];
 
     protected $hidden = [
