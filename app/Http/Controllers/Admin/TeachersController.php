@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Models\School;
 use App\Models\Prefecture;
+use Illuminate\Support\Facades\Hash;
 class TeachersController extends Controller
 {
     /**
@@ -21,7 +23,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::with('address.prefecture')->get();
+        $teachers = Teacher::with('address.prefecture', 'university')->get();
         return view('admin.teachers.index', compact('teachers'));
     }
 
@@ -33,7 +35,8 @@ class TeachersController extends Controller
     public function create()
     {
         $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
-        return view('admin.teachers.create', compact('prefectures'));
+        $universities = School::orderBy('id', 'asc')->get();
+        return view('admin.teachers.create', compact('prefectures', 'universities'));
     }
 
     /**
@@ -44,8 +47,23 @@ class TeachersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+        // dd($request);
+        Teacher::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'city_id' => $request->address,
+            'university_id' => $request->university,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.students.index');
     }
+
 
     /**
      * Display the specified resource.
