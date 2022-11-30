@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Prefecture;
+use App\Models\School;
 use Illuminate\Support\Facades\Hash;
 
 class StudentsController extends Controller
@@ -36,7 +37,8 @@ class StudentsController extends Controller
     public function create()
     {
         $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
-        return view('admin.students.create', compact('prefectures'));
+        $schools = School::orderBy('id', 'asc')->get();
+        return view('admin.students.create', compact('prefectures', 'schools'));
     }
 
     /**
@@ -52,10 +54,12 @@ class StudentsController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
-
+        // dd($request->school);
         Student::create([
             'name' => $request->name,
             'email' => $request->email,
+            'city_id' => $request->address,
+            'shool_id' => $request->school,
             'password' => Hash::make($request->password),
         ]);
 

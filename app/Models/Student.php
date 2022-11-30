@@ -15,6 +15,11 @@ class Student extends Authenticatable
         return $this->belongsTo(City::class, 'city_id');
     }
 
+    public function school()
+    {
+        return $this->belongsTo(Shool::class, 'school_id');
+    }
+
     protected $fillable = [
         'name',
         'email',
