@@ -41,23 +41,23 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            //prefix→urlのセット宇治をグループ化して設定
+            //prefix→urlの接頭辞をグループ化して設定
             Route::prefix('admin')
             ->as('admin.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            // ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
 
             Route::prefix('student')
             ->as('student.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            // ->namespace($this->namespace)
             ->group(base_path('routes/student.php'));
 
             Route::prefix('teacher')
             ->as('teacher.')
             ->middleware('web')
-            ->namespace($this->namespace)
+            // ->namespace($this->namespace)
             ->group(base_path('routes/teacher.php'));
         });
     }
