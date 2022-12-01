@@ -103,6 +103,11 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
         $student = Student::findOrFail($id);
         $student->name = $request->name;
         $student->email = $request->email;
