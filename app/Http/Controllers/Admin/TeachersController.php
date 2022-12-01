@@ -84,7 +84,10 @@ class TeachersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
+        $universities = School::orderBy('id', 'asc')->get();
+        return view('admin.teachers.edit', compact('teacher', 'prefectures', 'universities'));
     }
 
     /**
@@ -96,7 +99,15 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        $teacher->name = $request->name;
+        $teacher->email = $request->email;
+        $teacher->city_id = $request->address;
+        $teacher->university_id = $request->university;
+        $teacher->password = Hash::make($request->password);
+
+        $teacher->save();
+        return redirect()->route('admin.teachers.index');
     }
 
     /**

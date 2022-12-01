@@ -88,6 +88,7 @@ class StudentsController extends Controller
     public function edit($id)
     {
         $student = Student::findOrFail($id);
+        // dd($student);
         $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
         $schools = School::orderBy('id', 'asc')->get();
         return view('admin.students.edit', compact('student', 'prefectures', 'schools'));
@@ -109,7 +110,6 @@ class StudentsController extends Controller
         $student->school_id = $request->school;
         $student->desired_school_id = $request->desired_school;
         $student->password = Hash::make($request->password);
-        $student->email = $request->email;
 
         $student->save();
         return redirect()->route('admin.students.index');
