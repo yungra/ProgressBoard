@@ -25,7 +25,7 @@ class StudentsController extends Controller
 
     public function index()
     {
-        $students = Student::with('address.prefecture', 'school', 'desired_school')->get();
+        $students = Student::with('address.prefecture', 'school', 'desired_school')->paginate(3);
         // dd($students);
         return view('admin.students.index', compact('students'));
     }
