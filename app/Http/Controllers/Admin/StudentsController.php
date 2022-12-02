@@ -128,6 +128,17 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::findOrFail($id)->delete(); //ソフトデリート
+        return redirect()->route('admin.students.index');
+    }
+
+    public function expiredStudentIndex(){
+        $expiredStudents = Student::onlyTrashed()->get();
+        return view('admin.students.expired-students', compact('expiredStudents'));
+    }
+    
+    public function expiredStudentDestroy($id){
+        Student::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.expired-students.index'); 
     }
 }

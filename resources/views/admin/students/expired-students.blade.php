@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            生徒一覧
+            削除済み生徒一覧
         </h2>
     </x-slot>
 
@@ -16,9 +16,7 @@
                     <section class="text-gray-600 body-font">
                         <div class="container px-5 mx-auto">
 
-                            <div class="flex justify-end mb-4">
-                            <button onclick="location.href='{{ route('admin.students.create') }}'" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規登録する</button>
-                            </div>
+                
 
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -29,30 +27,26 @@
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">住所</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">学校名</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">志望校名</th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">削除した日</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($students as $student)
+                                        @foreach ($expiredStudents as $student)
                                         <tr>
                                             <td class="px-4 py-3">{{ $student->name }}</td>
                                             <td class="px-4 py-3">{{ $student->email }}</td>
                                             <td class="px-4 py-3">{{ $student->address->prefecture->name}}{{ $student->address->name }}</td>
                                             <td class="px-4 py-3">{{ $student->school->name}}</td>
                                             <td class="px-4 py-3">{{ $student->desired_school->name}}</td>
-                                            <td class="px-4 py-3">{{ $student->created_at }}</td>
-                                            <td class="px-4 py-3">
-                                                <button onclick="location.href='{{ route('admin.students.edit', $student->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
-                                            </td>
+                                            <td class="px-4 py-3">{{ $student->deleted_at }}</td>
+                                            
                                             {{-- route('ルート名', ['パラメータ名'=>'値']) --}}
                                             
-                                            <form id="delete_{{$student->id}}" method="post" action="{{ route('admin.students.destroy', ['student' => $student->id ] )}}">
+                                            <form id="delete_{{$student->id}}" method="post" action="{{ route('admin.expired-students.destroy', ['student' => $student->id ] )}}">
                                             @csrf
-                                            @method('delete')
                                                 <td class="px-4 py-3">
-                                                <a href="#" data-id="{{  $student->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">削除</a>
+                                                <a href="#" data-id="{{  $student->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">完全に削除</a>
                                             </td>
                                             </form>
                                         </tr>
