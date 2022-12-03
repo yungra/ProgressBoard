@@ -41,6 +41,30 @@ class TeacherSeeder extends Seeder
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
+            [
+            'name' => 'test7',
+            'email' => 'test7@test.com',
+            'password' => Hash::make('password123'),
+            'city_id' => '38', //京都府右京区
+            'university_id' => '2',
+            'created_at' => '2022/10/10 10:10:10'
+            ],
+            [
+            'name' => 'tes8',
+            'email' => 'test8@test.com',
+            'password' => Hash::make('password123'),
+            'city_id' => '38', //京都府右京区
+            'university_id' => '2',
+            'created_at' => '2022/10/10 10:10:10'
+            ],
+            [
+            'name' => 'test9',
+            'email' => 'test9@test.com',
+            'password' => Hash::make('password123'),
+            'city_id' => '38', //京都府右京区
+            'university_id' => '2',
+            'created_at' => '2022/10/10 10:10:10'
+            ],
         ]);
     }
 }

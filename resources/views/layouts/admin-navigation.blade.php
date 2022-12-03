@@ -26,6 +26,9 @@
                     <x-nav-link :href="route('admin.teachers.index')" :active="request()->routeIs('admin.teachers.index')">
                         講師管理
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.expired-teachers.index')" :active="request()->routeIs('admin.expired-teachers.index')">
+                        削除した講師管理
+                    </x-nav-link>
                 </div>
             </div>
 

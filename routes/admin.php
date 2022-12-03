@@ -42,6 +42,12 @@ middleware('auth:admin')->group(function(){
 Route::resource('teachers', TeachersController::class)
 ->middleware('auth:admin');
 
+Route::prefix('expired-teachers')->
+middleware('auth:admin')->group(function(){
+    Route::get('index', [TeachersController::class, 'expiredTeacherIndex'])->name('expired-teachers.index');
+    Route::post('destroy/{teacher}', [TeachersController::class, 'expiredTeacherDestroy'])->name('expired-teachers.destroy');
+});
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })

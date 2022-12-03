@@ -46,8 +46,8 @@
                                             <td class="px-4 py-3">
                                                 <button onclick="location.href='{{ route('admin.students.edit', $student->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
                                             </td>
-                                            {{-- route('ルート名', ['パラメータ名'=>'値']) --}}
-                                            
+
+                                            {{-- route('ルート名', ['パラメータ名'=>'値'])で、パラメータを指定できる --}}
                                             <form id="delete_{{$student->id}}" method="post" action="{{ route('admin.students.destroy', ['student' => $student->id ] )}}">
                                             @csrf
                                             @method('delete')

@@ -23,7 +23,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::with('address.prefecture', 'university')->get();
+        $teachers = Teacher::with('address.prefecture', 'university')->paginate(3);
         return view('admin.teachers.index', compact('teachers'));
     }
 
@@ -123,6 +123,17 @@ class TeachersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Teacher::findOrFail($id)->delete(); //ソフトデリート
+        return redirect()->route('admin.teachers.index');
+    }
+
+    public function expiredTeacherIndex(){
+        $expiredTeachers = Teacher::onlyTrashed()->get();
+        return view('admin.teachers.expired-teachers', compact('expiredTeachers'));
+    }
+    
+    public function expiredTeacherDestroy($id){
+        Teacher::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.expired-teachers.index'); 
     }
 }
