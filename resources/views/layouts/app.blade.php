@@ -17,9 +17,9 @@
         <div class="min-h-screen bg-gray-100">
             @if(auth('admin')->user())
                 @include('layouts.admin-navigation')
-            @elseif(auth('student')->user())
+            @elseif(auth('students')->user())
                 @include('layouts.student-navigation')
-            @elseif(auth('teacher')->user())
+            @elseif(auth('teachers')->user())
                 @include('layouts.teacher-navigation')
             @endif
 
