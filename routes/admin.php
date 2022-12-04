@@ -31,10 +31,22 @@ Route::get('/', function () {
 });
 
 Route::resource('students', StudentsController::class)
-->middleware('auth:admin');
+->middleware('auth:admin')->except(['show']);
+
+Route::prefix('expired-students')->
+middleware('auth:admin')->group(function(){
+    Route::get('index', [StudentsController::class, 'expiredStudentIndex'])->name('expired-students.index');
+    Route::post('destroy/{student}', [StudentsController::class, 'expiredStudentDestroy'])->name('expired-students.destroy');
+});
 
 Route::resource('teachers', TeachersController::class)
 ->middleware('auth:admin');
+
+Route::prefix('expired-teachers')->
+middleware('auth:admin')->group(function(){
+    Route::get('index', [TeachersController::class, 'expiredTeacherIndex'])->name('expired-teachers.index');
+    Route::post('destroy/{teacher}', [TeachersController::class, 'expiredTeacherDestroy'])->name('expired-teachers.destroy');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

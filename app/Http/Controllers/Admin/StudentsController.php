@@ -25,7 +25,7 @@ class StudentsController extends Controller
 
     public function index()
     {
-        $students = Student::with('address.prefecture', 'school', 'desired_school')->get();
+        $students = Student::with('address.prefecture', 'school', 'desired_school')->paginate(3);
         // dd($students);
         return view('admin.students.index', compact('students'));
     }
@@ -128,6 +128,17 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::findOrFail($id)->delete(); //ソフトデリート
+        return redirect()->route('admin.students.index');
+    }
+
+    public function expiredStudentIndex(){
+        $expiredStudents = Student::onlyTrashed()->get();
+        return view('admin.students.expired-students', compact('expiredStudents'));
+    }
+    
+    public function expiredStudentDestroy($id){
+        Student::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.expired-students.index'); 
     }
 }
