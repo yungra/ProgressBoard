@@ -84,6 +84,18 @@
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.students.index')" :active="request()->routeIs('admin.students.index')">
+                生徒管理
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.expired-students.index')" :active="request()->routeIs('admin.expired-students.index')">
+                削除した生徒一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.teachers.index')" :active="request()->routeIs('admin.teachers.index')">
+                講師一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.expired-teachers.index')" :active="request()->routeIs('admin.expired-teachers.index')">
+                削除した講師一覧
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

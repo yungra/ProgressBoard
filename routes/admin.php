@@ -31,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::resource('students', StudentsController::class)
-->middleware('auth:admin');
+->middleware('auth:admin')->except(['show']);
 
 Route::prefix('expired-students')->
 middleware('auth:admin')->group(function(){
