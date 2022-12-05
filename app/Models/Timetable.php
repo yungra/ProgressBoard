@@ -9,7 +9,7 @@ class Timetable extends Model
 {
     use HasFactory;
 
-    protected $table = 'your_table';
+    // protected $table = 'your_table';
 
     public function guidanceReport(){
         return $this->hasMany(GuidanceReport::class);

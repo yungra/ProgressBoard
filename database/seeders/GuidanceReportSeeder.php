@@ -22,7 +22,71 @@ class GuidanceReportSeeder extends Seeder
                 'timetable_id' => '2',
                 'subject_id' => '3', //古文
                 'report' => 'ああああああああ',
-                // 'created_at' => '2022/10/10 10:10:10'
+                'class_day' => '2022-02-10'
+            ],
+            [
+                'student_id' => '1',
+                'teacher_id' => '3',
+                'timetable_id' => '4',
+                'subject_id' => '2', //
+                'report' => 'ああああああああ',
+                'class_day' => '2022-02-10'
+            ],
+            [
+                'student_id' => '1',
+                'teacher_id' => '2',
+                'timetable_id' => '2',
+                'subject_id' => '3', //古文
+                'report' => 'ああああああああ',
+                'class_day' => '2022-02-10'
+            ],
+            [
+                'student_id' => '1',
+                'teacher_id' => '2',
+                'timetable_id' => '2',
+                'subject_id' => '3', //古文
+                'report' => 'ああああああああ',
+                'class_day' => '2022-02-10'
+            ],
+            [
+                'student_id' => '2',
+                'teacher_id' => '3',
+                'timetable_id' => '4',
+                'subject_id' => '7', //歴史
+                'report' => 'いいいいいいいい',
+                'class_day' => '2022-02-11'
+            ],
+            [
+                'student_id' => '2',
+                'teacher_id' => '3',
+                'timetable_id' => '4',
+                'subject_id' => '7', //歴史
+                'report' => 'いいいいいいいい',
+                'class_day' => '2022-02-11'
+            ],
+            [
+                'student_id' => '2',
+                'teacher_id' => '3',
+                'timetable_id' => '4',
+                'subject_id' => '7', //歴史
+                'report' => 'いいいいいいいい',
+                'class_day' => '2022-02-11'
+            ],
+            [
+                'student_id' => '2',
+                'teacher_id' => '3',
+                'timetable_id' => '4',
+                'subject_id' => '7', //歴史
+                'report' => 'いいいいいいいい',
+                'class_day' => '2022-02-11'
+            ],
+            [
+                'student_id' => '3',
+                'teacher_id' => '2',
+                'timetable_id' => '2',
+                'subject_id' => '3', //古文
+                'report' => 'ああああああああ',
+                'class_day' => '2022-02-13'
             ],
             
         ]);

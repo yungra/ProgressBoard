@@ -12,6 +12,7 @@ use App\Http\Controllers\Student\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Student\Auth\RegisteredUserController;
 use App\Http\Controllers\Student\Auth\VerifyEmailController;
 use App\Http\Controllers\Student\TeachersController;
+use App\Http\Controllers\Student\GuidanceReportsController;
 
 
 /*
@@ -37,6 +38,9 @@ Route::get('/dashboard', function () {
 
 Route::get('teachers', [TeachersController::class, 'index'])
 ->middleware('auth:students')->name('teachers.index');
+
+Route::get('reports', [GuidanceReportsController::class, 'index'])
+->middleware('auth:students')->name('reports.index');
 
 
 Route::middleware('auth:students')->group(function () {
