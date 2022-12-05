@@ -19,19 +19,20 @@ return new class extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignId('teacher_id')
+            $table->date('class_day');//授業日
+            $table->foreignId('timetable_id')//コマ
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignId('timetable_id')
+            $table->foreignId('subject_id')//科目
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignId('subject_id')
+            $table->foreignId('teacher_id')//担当講師
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->text('report');
+            $table->text('report');//本文
             $table->timestamps();
         });
     }
