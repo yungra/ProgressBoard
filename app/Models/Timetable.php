@@ -11,6 +11,10 @@ class Timetable extends Model
 
     protected $table = 'your_table';
 
+    public function guidanceReport(){
+        return $this->hasMany(GuidanceReport::class);
+    }
+
     protected $fillable = [
         'name',
         'day'

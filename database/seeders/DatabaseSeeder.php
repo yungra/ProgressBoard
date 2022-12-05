@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
             StudentSeeder::class, // 開発用
             TeacherSeeder::class, // 開発用
+            GuidanceReportSeeder::class,// 開発用
         ]);
     }
 }
