@@ -17,6 +17,9 @@
                     <x-nav-link :href="route('student.dashboard')" :active="request()->routeIs('student.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('student.teachers.index')" :active="request()->routeIs('student.dashboard')">
+                        講師一覧
+                    </x-nav-link>
                 </div>
             </div>
 

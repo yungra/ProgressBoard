@@ -11,6 +11,7 @@ use App\Http\Controllers\Student\Auth\PasswordController;
 use App\Http\Controllers\Student\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Student\Auth\RegisteredUserController;
 use App\Http\Controllers\Student\Auth\VerifyEmailController;
+use App\Http\Controllers\Student\TeachersController;
 
 
 /*
@@ -33,6 +34,10 @@ Route::get('/dashboard', function () {
 })
 //⇓ここで認証してるか確認。
 ->middleware(['auth:students', 'verified'])->name('dashboard');
+
+Route::get('teachers', [TeachersController::class, 'index'])
+->middleware('auth:students')->name('teachers.index');
+
 
 Route::middleware('auth:students')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
