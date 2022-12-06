@@ -11,6 +11,9 @@ use App\Http\Controllers\Teacher\Auth\PasswordController;
 use App\Http\Controllers\Teacher\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Teacher\Auth\RegisteredUserController;
 use App\Http\Controllers\Teacher\Auth\VerifyEmailController;
+use App\Http\Controllers\Teacher\TeachersController;
+use App\Http\Controllers\Teacher\StudentsController;
+use App\Http\Controllers\Teacher\MyinfoController;
 
 
 /*
@@ -30,9 +33,22 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('teacher.dashboard');
-})
-//⇓ここで認証してるか確認。
-->middleware(['auth:teachers', 'verified'])->name('dashboard');
+})->middleware(['auth:teachers', 'verified'])->name('dashboard');
+
+Route::get('teachers', [TeachersController::class, 'index'])
+->middleware('auth:teachers')->name('teachers.index');
+
+Route::get('students', [StudentsController::class, 'index'])
+->middleware('auth:teachers')->name('students.index');
+
+Route::prefix('myinfo')
+->middleware('auth:teachers')
+->group(function () {
+    Route::get('index', [MyinfoController::class, 'index'])->name('myinfo.index');
+    Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
+    Route::post('update/{teacher}', [MyinfoController::class, 'update'])->name('myinfo.update');
+});
+
 
 Route::middleware('auth:teachers')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
