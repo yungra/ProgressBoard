@@ -132,17 +132,17 @@ return [
     // ),
     'cookie_admin' => env(
         'SESSION_COOKIE_ADMIN',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session_admin'
+        'admin'
     ),
 
     'cookie_student' => env(
         'SESSION_COOKIE_STUDENT',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session_student'
+        'student'
     ),
 
     'cookie_teacher' => env(
         'SESSION_COOKIE_TEACHER',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session_teacher'
+        'teacher'
     ),
 
     /*

@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // adminから始まるURL
         if (request()->is('admin*')) {
+            // dd(config('session.cookie_admin'));
             config('session.cookie_admin');
         }
         // studentから始まるURL
