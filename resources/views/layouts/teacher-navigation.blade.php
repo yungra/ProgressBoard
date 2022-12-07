@@ -17,6 +17,15 @@
                     <x-nav-link :href="route('teacher.dashboard')" :active="request()->routeIs('teacher.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('teacher.teachers.index')" :active="request()->routeIs('teacher.teachers.index')">
+                        講師一覧
+                    </x-nav-link>
+                    <x-nav-link :href="route('teacher.students.index')" :active="request()->routeIs('teacher.students.index')">
+                        生徒一覧
+                    </x-nav-link>
+                    <x-nav-link :href="route('teacher.myinfo.index')" :active="request()->routeIs('teacher.myinfo.index')">
+                        登録情報変更
+                    </x-nav-link>
                 </div>
             </div>
 

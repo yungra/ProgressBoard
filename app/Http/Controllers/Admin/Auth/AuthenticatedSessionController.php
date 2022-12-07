@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Log::debug('admin', $request->session()->all());
+        Log::debug('admin', $request->session()->all());
 
         return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
     }
