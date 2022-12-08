@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             StudentSeeder::class, // 開発用
             TeacherSeeder::class, // 開発用
             GuidanceReportSeeder::class,// 開発用
+            ChatRoomSeeder::class,// 開発用
+            MessageSeeder::class,// 開発用
         ]);
     }
 }

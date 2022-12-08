@@ -14,6 +14,8 @@ use App\Http\Controllers\Teacher\Auth\VerifyEmailController;
 use App\Http\Controllers\Teacher\TeachersController;
 use App\Http\Controllers\Teacher\StudentsController;
 use App\Http\Controllers\Teacher\MyinfoController;
+use App\Http\Controllers\Teacher\GuidanceReportsController;
+use App\Http\Controllers\Teacher\ChatsController;
 
 
 /*
@@ -35,11 +37,17 @@ Route::get('/dashboard', function () {
     return view('teacher.dashboard');
 })->middleware(['auth:teachers', 'verified'])->name('dashboard');
 
-Route::get('teachers', [TeachersController::class, 'index'])
-->middleware('auth:teachers')->name('teachers.index');
-
 Route::get('students', [StudentsController::class, 'index'])
 ->middleware('auth:teachers')->name('students.index');
+
+Route::resource('reports', GuidanceReportsController::class)
+->middleware('auth:teachers');
+
+Route::resource('chats', ChatsController::class)
+->middleware('auth:teachers');
+
+Route::get('teachers', [TeachersController::class, 'index'])
+->middleware('auth:teachers')->name('teachers.index');
 
 Route::prefix('myinfo')
 ->middleware('auth:teachers')
