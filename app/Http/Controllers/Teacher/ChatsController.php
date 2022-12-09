@@ -65,7 +65,7 @@ class ChatsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('teacher.chats.edit');
     }
 
     /**
