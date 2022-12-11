@@ -1,7 +1,9 @@
-const { default: axios } = require('axios');
+// const { default: axios } = require('axios');
+import axios from 'axios';
 
 //モジュール化されたJavaScriptファイルを読み込む
-require('./bootstrap');
+// require('./bootstrap');
+import './bootstrap';
 
 const message_el = document.getElementById("messages");
 const username_input = document.getElementById("username");
