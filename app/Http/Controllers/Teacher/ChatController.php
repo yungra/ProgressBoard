@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ChatRoom;
 use App\Models\Student;
 
-class ChatsController extends Controller
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.

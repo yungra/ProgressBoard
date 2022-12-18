@@ -15,7 +15,7 @@ use App\Http\Controllers\Teacher\TeachersController;
 use App\Http\Controllers\Teacher\StudentsController;
 use App\Http\Controllers\Teacher\MyinfoController;
 use App\Http\Controllers\Teacher\GuidanceReportsController;
-use App\Http\Controllers\Teacher\ChatsController;
+use App\Http\Controllers\Teacher\ChatController;
 
 
 /*
@@ -43,7 +43,7 @@ Route::get('students', [StudentsController::class, 'index'])
 Route::resource('reports', GuidanceReportsController::class)
 ->middleware('auth:teachers');
 
-Route::resource('chats', ChatsController::class)
+Route::resource('chats', ChatController::class)
 ->middleware('auth:teachers');
 
 Route::get('teachers', [TeachersController::class, 'index'])
@@ -57,6 +57,14 @@ Route::prefix('myinfo')
     Route::post('update/{teacher}', [MyinfoController::class, 'update'])->name('myinfo.update');
 });
 
+
+Route::prefix('chat')->middleware('auth')->controller(ChatController::class)->group(function(){
+
+    Route::get('/', 'index')->name('chat.index');
+    Route::get('/list', 'list')->name('chat.list');
+    Route::post('/', 'store')->name('chat.store');
+
+});
 
 Route::middleware('auth:teachers')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
