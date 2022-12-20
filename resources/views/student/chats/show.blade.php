@@ -21,7 +21,7 @@
                 </div>
               </div>
 
-                <form action="{{ route('teacher.chat.send', $teacher->id ) }}" method="post">
+                <form action="{{ route('student.chat.send', $teacher->id ) }}" method="post">
                     @csrf
                     <div class="flex justify-center p-2 w-full">
                         <div class="relative">

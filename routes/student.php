@@ -13,6 +13,7 @@ use App\Http\Controllers\Student\Auth\RegisteredUserController;
 use App\Http\Controllers\Student\Auth\VerifyEmailController;
 use App\Http\Controllers\Student\TeachersController;
 use App\Http\Controllers\Student\GuidanceReportsController;
+use App\Http\Controllers\Student\ChatController;
 
 
 /*
@@ -42,6 +43,13 @@ Route::get('teachers', [TeachersController::class, 'index'])
 Route::get('reports', [GuidanceReportsController::class, 'index'])
 ->middleware('auth:students')->name('reports.index');
 
+Route::prefix('chat')
+->middleware('auth:students')
+->group(function () {
+    Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
+    // Route::get('add/{id}', [ChatController::class, 'add'])->name('chat.add');
+    Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
+});
 
 Route::middleware('auth:students')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
