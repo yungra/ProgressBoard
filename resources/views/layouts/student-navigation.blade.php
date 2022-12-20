@@ -14,8 +14,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('student.dashboard')" :active="request()->routeIs('student.dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('student.myinfo.index')" :active="request()->routeIs('teacher.myinfo.index')">
+                        登録情報
                     </x-nav-link>
                     <x-nav-link :href="route('student.teachers.index')" :active="request()->routeIs('student.teachers.index')">
                         講師一覧
