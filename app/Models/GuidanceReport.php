@@ -32,6 +32,7 @@ class GuidanceReport extends Model
     protected $fillable = [
         'student_id',
         'teacher_id',
+        'class_day',
         'timetable_id',
         'subject_id',
         'report',

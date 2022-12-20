@@ -14,6 +14,8 @@ use App\Http\Controllers\Teacher\Auth\VerifyEmailController;
 use App\Http\Controllers\Teacher\TeachersController;
 use App\Http\Controllers\Teacher\StudentsController;
 use App\Http\Controllers\Teacher\MyinfoController;
+use App\Http\Controllers\Teacher\GuidanceReportsController;
+use App\Http\Controllers\Teacher\ChatController;
 
 
 /*
@@ -35,11 +37,26 @@ Route::get('/dashboard', function () {
     return view('teacher.dashboard');
 })->middleware(['auth:teachers', 'verified'])->name('dashboard');
 
-Route::get('teachers', [TeachersController::class, 'index'])
-->middleware('auth:teachers')->name('teachers.index');
-
 Route::get('students', [StudentsController::class, 'index'])
 ->middleware('auth:teachers')->name('students.index');
+
+Route::resource('reports', GuidanceReportsController::class)
+->middleware('auth:teachers');
+
+// Route::resource('chats', ChatController::class)
+// ->middleware('auth:teachers');
+
+Route::prefix('chat')
+->middleware('auth:teachers')
+->group(function () {
+    Route::get('index', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
+    Route::get('add/{id}', [ChatController::class, 'add'])->name('chat.add');
+    Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
+});
+
+Route::get('teachers', [TeachersController::class, 'index'])
+->middleware('auth:teachers')->name('teachers.index');
 
 Route::prefix('myinfo')
 ->middleware('auth:teachers')
@@ -49,6 +66,13 @@ Route::prefix('myinfo')
     Route::post('update/{teacher}', [MyinfoController::class, 'update'])->name('myinfo.update');
 });
 
+
+Route::prefix('chat')->middleware('auth')->controller(ChatController::class)->group(function(){
+
+    Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('add/{id}', [ChatController::class, 'add'])->name('chat.add');
+
+});
 
 Route::middleware('auth:teachers')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
