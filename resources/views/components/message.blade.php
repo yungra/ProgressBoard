@@ -1,13 +1,13 @@
 <div class="media">
     <div class="media-body comment-body">
-        {{-- <div class="row">
+        <div class="row">
             @if ($item->is_student)
-            <span class="comment-body-user">{{$item->entry->user->name}}</span>
+            <span class="comment-body-user">生徒側</span>
             @else 
-            <span class="comment-body-user">{{$item->entry->job->company->name}}</span>
+            <span class="comment-body-user">自分側</span>
             @endif
             <span class="comment-body-time">{{$item->created_at}}</span>
-        </div> --}}
+        </div>
         <span class="comment-body-content">
             <div id="comment-data"></div>
             {{$item->content}}

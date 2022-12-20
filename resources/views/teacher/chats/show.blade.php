@@ -10,7 +10,7 @@
             <div class="chat-container row justify-content-center">
                 <div class="chat-area">
                   <div class="card">
-                    <div class="card-header">チャットルーム</div>
+                    {{-- <div class="card-header">チャットルーム</div> --}}
                     <div class="card-body chat-card">
                       {{-- <div id="comment-data"></div> --}}
                       @foreach ($chat_room->messages as $item)
