@@ -15,7 +15,7 @@ class Message extends Model
     }
 
     protected $fillable = [
-        'room_id',
+        'chat_room_id',
         'is_student',
         'content',
     ];

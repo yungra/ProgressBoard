@@ -23,9 +23,6 @@
                     <x-nav-link :href="route('teacher.reports.index')" :active="request()->routeIs('teacher.reports.index')">
                         指導報告書
                     </x-nav-link>
-                    <x-nav-link :href="route('teacher.chats.index')" :active="request()->routeIs('teacher.chats.index')">
-                        チャット
-                    </x-nav-link>
                     <x-nav-link :href="route('teacher.teachers.index')" :active="request()->routeIs('teacher.teachers.index')">
                         講師一覧
                     </x-nav-link>
