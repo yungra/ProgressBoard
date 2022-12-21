@@ -49,9 +49,7 @@ Route::resource('reports', GuidanceReportsController::class)
 Route::prefix('chat')
 ->middleware('auth:teachers')
 ->group(function () {
-    Route::get('index', [ChatController::class, 'index'])->name('chat.index');
     Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
-    Route::get('add/{id}', [ChatController::class, 'add'])->name('chat.add');
     Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
 });
 
@@ -64,14 +62,6 @@ Route::prefix('myinfo')
     Route::get('index', [MyinfoController::class, 'index'])->name('myinfo.index');
     Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
     Route::post('update/{teacher}', [MyinfoController::class, 'update'])->name('myinfo.update');
-});
-
-
-Route::prefix('chat')->middleware('auth')->controller(ChatController::class)->group(function(){
-
-    Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('add/{id}', [ChatController::class, 'add'])->name('chat.add');
-
 });
 
 Route::middleware('auth:teachers')->group(function () {
