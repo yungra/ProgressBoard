@@ -28,12 +28,6 @@ class ChatController extends Controller
 
     public function show($id)
     {
-        dd('test');
-        // return view('teacher.chats.show');
-    }
-
-    public function add($id)
-    {
         $chat_room = ChatRoom::where('student_id', '=', $id)
         ->where('teacher_id', '=', Auth::id())
         ->with('messages')
@@ -48,8 +42,6 @@ class ChatController extends Controller
                 'teacher_id' => Auth::id(),
             ]);
         }
-
-
         $student = Student::where('id', '=', $id)->first();
         $messages = Message::get();
         return view('teacher.chats.show', compact('student', 'chat_room'));
@@ -68,7 +60,7 @@ class ChatController extends Controller
             'is_student' => 0,
             'content' => $content,
         ]);
-        return redirect()->route('teacher.chat.add',$id);
+        return redirect()->route('teacher.chat.show',$id);
     }
 
     /**
