@@ -40,8 +40,8 @@ Route::get('/dashboard', function () {
 Route::get('teachers', [TeachersController::class, 'index'])
 ->middleware('auth:students')->name('teachers.index');
 
-Route::get('reports', [GuidanceReportsController::class, 'index'])
-->middleware('auth:students')->name('reports.index');
+Route::resource('reports', GuidanceReportsController::class)
+->middleware('auth:students');
 
 Route::prefix('chat')
 ->middleware('auth:students')

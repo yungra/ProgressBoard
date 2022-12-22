@@ -30,4 +30,11 @@ class GuidanceReportsController extends Controller
         return view('student.reports.index', compact('reports'));
     }
 
+    public function show($id)
+    {
+        $report = GuidanceReport::with('teacher', 'timetable', 'subject')->findOrFail($id);
+        // dd($report);
+        return view('student.reports.show', compact('report'));
+    }
+
 }
