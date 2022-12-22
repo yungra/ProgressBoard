@@ -18,48 +18,48 @@ class TeacherSeeder extends Seeder
     {
         DB::table('teachers')->insert([
             [
-            'name' => 'test4',
-            'email' => 'test4@test.com',
+            'name' => 'teacher1',
+            'email' => 'teacher1@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '38', //京都府右京区
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test5',
-            'email' => 'test5@test.com',
+            'name' => 'teacher2',
+            'email' => 'teacher2@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '1909', //鹿児島県中種子町
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test6',
-            'email' => 'test6@test.com',
+            'name' => 'teacher3',
+            'email' => 'teacher3@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '38', //京都府右京区
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test7',
-            'email' => 'test7@test.com',
+            'name' => 'teacher4',
+            'email' => 'teacher4@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '38', //京都府右京区
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'tes8',
-            'email' => 'test8@test.com',
+            'name' => 'teacher5',
+            'email' => 'teacher5@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '38', //京都府右京区
             'university_id' => '2',
             'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'test9',
-            'email' => 'test9@test.com',
+            'name' => 'teacher6',
+            'email' => 'teacher6@test.com',
             'password' => Hash::make('password123'),
             'city_id' => '38', //京都府右京区
             'university_id' => '2',

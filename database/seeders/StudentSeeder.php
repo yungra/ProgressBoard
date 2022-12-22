@@ -18,8 +18,8 @@ class StudentSeeder extends Seeder
     {
         DB::table('students')->insert([
             [
-                'name' => 'test1',
-                'email' => 'test1@test.com',
+                'name' => 'student1',
+                'email' => 'student1@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '7', //三重県名張市
                 'school_id' => '1',
@@ -27,8 +27,8 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'name' => 'test2',
-                'email' => 'test2@test.com',
+                'name' => 'student2',
+                'email' => 'student2@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '42', //京都府福知山市
                 'school_id' => '1',
@@ -36,8 +36,8 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'name' => 'test3',
-                'email' => 'test3@test.com',
+                'name' => 'student3',
+                'email' => 'student3@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '7', //三重県名張市
                 'school_id' => '1',
@@ -45,8 +45,8 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'name' => 'test4',
-                'email' => 'test4@test.com',
+                'name' => 'student4',
+                'email' => 'student4@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '7', //三重県名張市
                 'school_id' => '1',
@@ -54,8 +54,8 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'name' => 'test5',
-                'email' => 'test5@test.com',
+                'name' => 'student5',
+                'email' => 'student5@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '7', //三重県名張市
                 'school_id' => '1',
@@ -63,8 +63,8 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'name' => 'test6',
-                'email' => 'test6@test.com',
+                'name' => 'student6',
+                'email' => 'student6@test.com',
                 'password' => Hash::make('password123'),
                 'city_id' => '7', //三重県名張市
                 'school_id' => '1',

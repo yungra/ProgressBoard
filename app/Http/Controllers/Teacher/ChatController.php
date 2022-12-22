@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ChatRoom;
 use App\Models\Teacher;
 use App\Models\Message;
+use App\Models\Student;
 
 class ChatController extends Controller
 {

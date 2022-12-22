@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\GuidanceReport;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Subject;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Report\Xml\Report;
+use Illuminate\Support\Facades\DB;
 
 class GuidanceReportsController extends Controller
 {
@@ -23,7 +25,6 @@ class GuidanceReportsController extends Controller
         $id = Auth::id();
         $reports = GuidanceReport::where('teacher_id', '=', $id)->with('student', 'timetable', 'subject')->get();
         
-        // dd($reports);
         return view('teacher.reports.index', compact('reports'));
     }
 
@@ -74,7 +75,9 @@ class GuidanceReportsController extends Controller
      */
     public function show($id)
     {
-        //
+        $report = GuidanceReport::with('student', 'timetable', 'subject')->findOrFail($id);
+        // dd($report);
+        return view('teacher.reports.show', compact('report'));
     }
 
     /**
@@ -86,11 +89,11 @@ class GuidanceReportsController extends Controller
     public function edit($id)
     {
         $report = GuidanceReport::findOrFail($id);
-        // dd($report);
         $students = Student::orderBy('id', 'asc')->get();
+        $teachers = Teacher::orderBy('id', 'asc')->get();
         $timetables = Timetable::orderBy('id', 'asc')->get();
         $subjects = Subject::orderBy('id', 'asc')->get();
-        return view('teacher.reports.edit', compact('report', 'students', 'timetables', 'subjects'));
+        return view('teacher.reports.edit', compact('report', 'students', 'timetables', 'subjects', 'teachers'));
     }
 
     /**
@@ -102,7 +105,28 @@ class GuidanceReportsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'report' => ['required', 'string'],
+        ]);
+        
+        try{
+            DB::transaction(function () use($request, $id) {
+               
+                    $report = GuidanceReport::findOrFail($id);
+                    $report->student_id = $request->student;
+                    $report->class_day = $request->class_day;
+                    $report->timetable_id = $request->timetable;
+                    $report->subject_id = $request->subject;
+                    $report->teacher_id = $request->teacher;
+                    $report->report = $request->report;
+                    $report->save();
+        });
+        }catch(Throwable $e){
+            Log::error($e);
+            throw $e;
+        }
+        return redirect()->route('teacher.reports.index');
+
     }
 
     /**
