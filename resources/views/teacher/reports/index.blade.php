@@ -21,7 +21,7 @@
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">生徒名</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">授業日</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">コマ名</th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">内容</th>
+                                            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">内容</th> --}}
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
                                         </tr>
@@ -32,10 +32,11 @@
                                             <td class="px-4 py-3">{{ $report->student->name }}</td>
                                             <td class="px-4 py-3">{{ $report->class_day }}</td>
                                             <td class="px-4 py-3">{{ $report->subject->name}}</td>
-                                            <td class="px-4 py-3">{{ $report->report }}</td>
+                                            {{-- <td class="px-4 py-3">{{ $report->report }}</td> --}}
                                             <td class="px-4 py-3">{{ $report->created_at }}</td>
+
                                             <td class="md:px-4 py-3">
-                                                <button onclick="location.href='{{ route('teacher.reports.edit', $report->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
+                                                <button onclick="location.href='{{ route('teacher.reports.show', $report->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">詳細</button>
                                             </td>
 
 

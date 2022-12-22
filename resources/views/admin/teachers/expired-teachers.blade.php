@@ -18,7 +18,7 @@
 
                 
 
-                            <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                            <div class="lg:w-6/7 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
                                         <tr>

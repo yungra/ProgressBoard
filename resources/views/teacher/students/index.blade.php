@@ -12,7 +12,7 @@
                     <section class="text-gray-600 body-font">
                         <div class="container md:px-5 mx-auto">
 
-                            <div class="lg:w-4/5 w-full mx-auto overflow-auto">
+                            <div class="lg:w-6/7 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
                                         <tr>

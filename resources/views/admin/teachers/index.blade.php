@@ -20,7 +20,7 @@
                             <button onclick="location.href='{{ route('admin.teachers.create') }}'" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規登録する</button>
                             </div>
 
-                            <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                            <div class="lg:w-5/6 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
                                         <tr>
@@ -29,6 +29,7 @@
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">住所</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">大学名</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
+                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                         </tr>
                                     </thead>
@@ -40,7 +41,7 @@
                                             <td class="px-4 py-3">{{ $teacher->address->prefecture->name}}{{ $teacher->address->name }}</td>
                                             <td class="px-4 py-3">{{ $teacher->university->name }}</td>
                                             <td class="px-4 py-3">{{ $teacher->created_at }}</td>
-                                            <td class="w-10 text-center">
+                                            <td class="px-4 py-3">
                                                 <button onclick="location.href='{{ route('admin.teachers.edit', $teacher->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
                                             </td>
 
