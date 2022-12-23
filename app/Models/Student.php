@@ -26,6 +26,11 @@ class Student extends Authenticatable
         return $this->belongsTo(School::class, 'desired_school_id');
     }
 
+    public function guidance_reports()
+    {
+        return $this->hasMany(GuidanceReport::class);
+    }
+
     protected $fillable = [
         'name',
         'email',

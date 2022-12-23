@@ -23,8 +23,12 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Student::with('address.prefecture', 'school', 'desired_school')->paginate(3);
-        return view('teacher.students.index', compact('students'));
+        $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
+        // ->paginate(3);
+        ->get();
+        $teacher_id = Auth::id();
+        // dd($students[0]->guidance_reports);
+        return view('teacher.students.index', compact('students', 'teacher_id'));
     }
 
 

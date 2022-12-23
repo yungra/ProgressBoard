@@ -16,40 +16,88 @@
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
                                         <tr>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">名前</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">住所</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">学校名</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">志望校名</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
-                                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                                                名前</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                メールアドレス</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                住所</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                学校名</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                志望校名</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                作成日</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($students as $student)
-                                        <tr>
-                                            <td class="md:px-4 py-3">{{ $student->name }}</td>
-                                            <td class="md:px-4 py-3">{{ $student->email }}</td>
-                                            <td class="md:px-4 py-3">{{ $student->address->prefecture->name}}{{ $student->address->name }}</td>
-                                            <td class="md:px-4 py-3">{{ $student->school->name}}</td>
-                                            <td class="md:px-4 py-3">{{ $student->desired_school->name}}</td>
-                                            <td class="md:px-4 py-3">{{ $student->created_at }}</td>
-                                            <td class="px-4 text-center">
-                                                <button onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                
-                              </tbody>
-                            </table>
-                            {{ $students->links() }}
-                          </div>
-                          
-                        </div>
-                      </section>
 
-                </div>
+                                        @foreach ($students as $student)
+                                            @php $flag = false; @endphp
+                                            @foreach ($student->guidance_reports as $s)
+                                                @if ($s->teacher_id === $teacher_id)
+                                                    @php
+                                                        $flag = true;
+                                                    @endphp
+                                                @break
+                                            @endif
+                                        @endforeach
+
+                                        @if ($flag === true)
+                                            <tr class="bg-amber-300">
+                                                <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                                <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                                <td class="md:px-4 py-3">
+                                                    {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                                </td>
+                                                <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                                <td class="md:px-4 py-3">{{ $student->desired_school->name }}
+                                                </td>
+                                                <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                                <td class="px-4 text-center">
+                                                    <button
+                                                        onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                                        class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                                <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                                <td class="md:px-4 py-3">
+                                                    {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                                </td>
+                                                <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                                <td class="md:px-4 py-3">{{ $student->desired_school->name }}</td>
+                                                <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                                <td class="px-4 text-center">
+                                                    <button
+                                                        onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                                        class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            {{-- {{ $students->links() }} --}}
+                        </div>
+
+                    </div>
+                </section>
+
             </div>
         </div>
     </div>
+</div>
 </x-app-layout>
