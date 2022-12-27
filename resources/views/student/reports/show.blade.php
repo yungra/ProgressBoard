@@ -14,7 +14,8 @@
                             <div class="flex flex-col text-center w-full mb-12">
                                 <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">指導報告書詳細</h1>
                             </div>
-                            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                            {{-- <div class="lg:w-1/2 md:w-2/3 mx-auto"> --}}
+                            <div class="w-full">
                                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                                 <form method="get"
                                     action="{{ route('teacher.reports.edit', ['report' => $report->id]) }}">
@@ -22,9 +23,9 @@
                                     {{-- @csrf --}}
                                     <div class="-m-2">
                                         
-                                        <div class="flex flex-row">
+                                        <div class="flex flex-row w-full">
                                         {{-- 左カラム --}}
-                                            <div class="flex-1">
+                                            <div class="flex-9">
 
                                             <div class="p-2 w-1/2 mx-auto">
                                                 <div class="relative">
@@ -69,9 +70,9 @@
                                         </div>
 
                                         {{-- 右カラム --}}
-                                        <div class="flex-9">
+                                        <div class="flex-1">
 
-                                            <div class="p-2 w-1/2">
+                                            <div class="p-2 w-full">
                                                 <div class="relative">
                                                     <label for="email" required
                                                     class="leading-7 text-sm text-gray-600">内容</label>

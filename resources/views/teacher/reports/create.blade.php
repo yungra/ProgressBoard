@@ -14,68 +14,84 @@
                             <div class="flex flex-col text-center w-full mb-12">
                                 <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">指導報告書登録</h1>
                             </div>
-                            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                            <div class="w-full">
                                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                                 <form method="post" action="{{ route('teacher.reports.store') }}">
                                     @csrf
-                                    <div class="p-2 w-1/2 mx-auto">
-                                        <div class="relative">
-                                            <label for="student_name"
-                                                class="leading-7 text-sm text-gray-600">生徒名</label>
-                                            <select name="student_id" id="student_name"
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                                @foreach ($students as $student)
-                                                    <option value="{{ $student->id }}">
-                                                        {{ $student->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+
+                                    <div class="flex flex-row w-full">
+                                        {{-- 左カラム --}}
+                                        <div class="flex-9">
+
+                                            <div class="w-2/3 mx-auto">
+                                                <div class="relative">
+                                                    <label for="student_name"
+                                                        class="leading-7 text-sm text-gray-600">生徒名</label>
+                                                    <select name="student_id" id="student_name"
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                        @foreach ($students as $student)
+                                                            <option value="{{ $student->id }}">
+                                                                {{ $student->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="w-2/3 mx-auto">
+                                                <div class="relative">
+                                                    <label for="class_day"
+                                                        class="leading-7 text-sm text-gray-600">授業日</label>
+                                                    <br>
+                                                    <input type="date" name="class_day">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="w-2/3 mx-auto">
+                                                <div class="relative">
+                                                    <label for="timetable"
+                                                        class="leading-7 text-sm text-gray-600">コマ名</label>
+                                                    <select name="timetable" id="timetable"
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                        @foreach ($timetables as $timetable)
+                                                            <option value="{{ $timetable->id }}">
+                                                                {{ $timetable->day }}曜{{ $timetable->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="w-2/3 mx-auto">
+                                                <div class="relative">
+                                                    <label for="subject"
+                                                        class="leading-7 text-sm text-gray-600">科目名</label>
+                                                    <select name="subject" id="subject"
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                        @foreach ($subjects as $subject)
+                                                            <option value="{{ $subject->id }}">
+                                                                {{ $subject->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
 
-                                    <div class="p-2 w-1/2 mx-auto">
-                                        <div class="relative">
-                                            <label for="class_day" class="leading-7 text-sm text-gray-600">授業日</label>
-                                            <br>
-                                            <input type="date" name="class_day">
-                                        </div>
-                                    </div>
+                                        {{-- 右カラム --}}
+                                        <div class="flex-1">
 
+                                            <div class="p-2 w-full ml-20">
+                                                <div class="relative">
+                                                    <label for="report"
+                                                        class="leading-7 text-sm text-gray-600">内容</label>
+                                                    <br>
+                                                    <textarea id="report" name="report" class="w-2/3"></textarea>
+                                                </div>
+                                            </div>
 
-                                    <div class="p-2 w-1/2 mx-auto">
-                                        <div class="relative">
-                                            <label for="timetable" class="leading-7 text-sm text-gray-600">コマ名</label>
-                                            <select name="timetable" id="timetable"
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                                @foreach ($timetables as $timetable)
-                                                    <option value="{{ $timetable->id }}">
-                                                        {{ $timetable->day }}曜{{ $timetable->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="p-2 w-1/2 mx-auto">
-                                        <div class="relative">
-                                            <label for="subject" class="leading-7 text-sm text-gray-600">コマ名</label>
-                                            <select name="subject" id="subject"
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                                @foreach ($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">
-                                                        {{ $subject->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="p-2 w-1/2 mx-auto">
-                                        <div class="relative">
-                                            <label for="report" class="leading-7 text-sm text-gray-600">内容</label>
-                                            <br>
-                                            <textarea id="report" name="report"></textarea>
                                         </div>
                                     </div>
 
