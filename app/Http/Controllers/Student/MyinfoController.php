@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Teacher;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB; // QueryBuilder クエリビルダ
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -15,21 +15,21 @@ use Illuminate\Support\Facades\Auth;
 
 class MyinfoController extends Controller
 {
-    public function show($id)
+    public function show()
     {
         $id = Auth::id();
-        $data = Teacher::where('id', '=', $id)->with('address.prefecture', 'university')->get();
+        $data = Student::where('id', '=', $id)->with('address.prefecture', 'school')->get();
         $myinfo = $data[0];
-        // dd($myinfo->address->prefecture);
-        return view('teacher.myinfo.show', compact('myinfo'));
+        // dd($myinfo);
+        return view('student.myinfo.show', compact('myinfo'));
     }
 
     public function edit($id)
     {
-        $teacher = Teacher::findOrFail($id);
+        $student = Student::findOrFail($id);
         $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
-        $universities = School::orderBy('id', 'asc')->get();
-        return view('teacher.myinfo.edit', compact('teacher', 'prefectures', 'universities'));
+        $schools = School::orderBy('id', 'asc')->get();
+        return view('student.myinfo.edit', compact('student', 'prefectures', 'schools'));
     }
 
     public function update(Request $request, $id)
@@ -44,19 +44,20 @@ class MyinfoController extends Controller
         try{
             DB::transaction(function () use($request, $id) {
                
-                    $teacher = Teacher::findOrFail($id);
-                    $teacher->name = $request->name;
-                    $teacher->email = $request->email;
-                    $teacher->city_id = $request->address;
-                    $teacher->university_id = $request->university;
-                    $teacher->password = Hash::make($request->password);
-                    $teacher->save();
+                    $student = Student::findOrFail($id);
+                    $student->name = $request->name;
+                    $student->email = $request->email;
+                    $student->city_id = $request->address;
+                    $student->school_id = $request->school;
+                    $student->desired_school_id = $request->desired_school;
+                    $student->password = Hash::make($request->password);
+                    $student->save();
         });
         }catch(Throwable $e){
             Log::error($e);
             throw $e;
         }
-        return redirect()->route('teacher.myinfo.show', ['id' => $id]);
+        return redirect()->route('student.myinfo.show', ['id' => $id]);
     }
 
 }

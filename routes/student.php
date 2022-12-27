@@ -14,6 +14,7 @@ use App\Http\Controllers\Student\Auth\VerifyEmailController;
 use App\Http\Controllers\Student\TeachersController;
 use App\Http\Controllers\Student\GuidanceReportsController;
 use App\Http\Controllers\Student\ChatController;
+use App\Http\Controllers\Student\MyinfoController;
 
 
 /*
@@ -36,6 +37,14 @@ Route::get('/dashboard', function () {
 })
 //⇓ここで認証してるか確認。
 ->middleware(['auth:students', 'verified'])->name('dashboard');
+
+Route::prefix('myinfo')
+->middleware('auth:students')
+->group(function () {
+    Route::get('show/{id}', [MyinfoController::class, 'show'])->name('myinfo.show');
+    Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
+    Route::post('update/{id}', [MyinfoController::class, 'update'])->name('myinfo.update');
+});
 
 Route::get('teachers', [TeachersController::class, 'index'])
 ->middleware('auth:students')->name('teachers.index');
