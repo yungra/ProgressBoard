@@ -16,20 +16,20 @@
                           </div>
                           <div class="lg:w-1/2 md:w-2/3 mx-auto">
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            <form method="post" action="{{ route('teacher.myinfo.update', ['id' => $teacher->id]) }}">
+                            <form method="post" action="{{ route('student.myinfo.update', ['id' => $student->id]) }}">
                               {{-- @method('PUT')   --}}
                               @csrf
                             <div class="-m-2">
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                   <label for="name" required class="leading-7 text-sm text-gray-600">名前</label>
-                                  <input type="text" id="name" name="name" value="{{ $teacher->name }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                  <input type="text" id="name" name="name" value="{{ $student->name }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                               </div>
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                   <label for="email" required class="leading-7 text-sm text-gray-600">メールアドレス</label>
-                                  <input type="email" id="email" name="email" value="{{ $teacher->email }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                  <input type="email" id="email" name="email" value="{{ $student->email }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                               </div>
 
@@ -40,7 +40,7 @@
                                     @foreach ($prefectures as $prefecture)
                                                         <optgroup label="{{ $prefecture->name }}">
                                                             @foreach ($prefecture->cities as $city)
-                                                                @if ($city->id === $teacher->city_id)
+                                                                @if ($city->id === $student->city_id)
                                                                     <option value="{{ $city->id }}" selected>
                                                                         {{ $prefecture->name }}{{ $city->name }}
                                                                     </option>
@@ -57,16 +57,35 @@
 
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
-                                  <label for="university" class="leading-7 text-sm text-gray-600">大学</label>
-                                  <select name="university" id="university" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    @foreach ($universities as $university)
-                                                        @if ($university->id === $teacher->university_id)
-                                                            <option value="{{ $university->id }}" selected>
-                                                                {{ $university->name }}
+                                  <label for="school" class="leading-7 text-sm text-gray-600">学校名</label>
+                                  <select name="school" id="school" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    @foreach ($schools as $school)
+                                                        @if ($school->id === $student->university_id)
+                                                            <option value="{{ $school->id }}" selected>
+                                                                {{ $school->name }}
                                                             </option>
                                                         @else
-                                                            <option value="{{ $university->id }}">
-                                                                {{ $university->name }}
+                                                            <option value="{{ $school->id }}">
+                                                                {{ $school->name }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                   </select>    
+                                </div>
+                              </div>
+
+                              <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                  <label for="desired_school" class="leading-7 text-sm text-gray-600">志望校名</label>
+                                  <select name="desired_school" id="desired_school" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    @foreach ($schools as $desired_school)
+                                                        @if ($desired_school->id === $student->university_id)
+                                                            <option value="{{ $desired_school->id }}" selected>
+                                                                {{ $desired_school->name }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $desired_school->id }}">
+                                                                {{ $desired_school->name }}
                                                             </option>
                                                         @endif
                                                     @endforeach
@@ -88,7 +107,7 @@
                               </div>
 
                               <div class="p-2 w-full flex justify-around mt-4">
-                                <button type="button" onclick="location.href='{{ route('teacher.myinfo.show', ['id' => $teacher->id]) }}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
+                                <button type="button" onclick="location.href='{{ route('student.myinfo.show', ['id' => $student->id]) }}'" class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
                                 <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">更新する</button>
                               </div>
                             </div>

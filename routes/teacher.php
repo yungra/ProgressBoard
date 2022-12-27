@@ -59,9 +59,9 @@ Route::get('teachers', [TeachersController::class, 'index'])
 Route::prefix('myinfo')
 ->middleware('auth:teachers')
 ->group(function () {
-    Route::get('index', [MyinfoController::class, 'index'])->name('myinfo.index');
+    Route::get('show/{id}', [MyinfoController::class, 'show'])->name('myinfo.show');
     Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
-    Route::post('update/{teacher}', [MyinfoController::class, 'update'])->name('myinfo.update');
+    Route::post('update/{id}', [MyinfoController::class, 'update'])->name('myinfo.update');
 });
 
 Route::middleware('auth:teachers')->group(function () {
