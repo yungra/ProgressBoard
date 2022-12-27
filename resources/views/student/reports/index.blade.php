@@ -27,6 +27,7 @@
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">科目</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">担当講師</th>
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
+                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">アンケート</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,6 +39,9 @@
                                             <td class="px-4 py-3">{{ $report->teacher->name }}</td>
                                             <td class="px-4 py-3">
                                                 <button onclick="location.href='{{ route('student.reports.show', $report->id) }}'" class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">詳細</button>
+                                            </td>
+                                            <td class="px-4 py-3">
+                                                <button onclick="location.href='{{ route('student.questionnaire.edit', $report->id) }}'" class="text-white bg-blue-400 border-0 py-2 px-4 focus:outline-none hover:bg-blue-600 rounded">回答する</button>
                                             </td>
 
 
