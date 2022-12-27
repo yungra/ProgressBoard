@@ -22,58 +22,69 @@
                                     {{-- @csrf --}}
                                     <div class="-m-2">
                                         
-                                        <div class="p-2 w-1/2 mx-auto">
-                                            <div class="relative">
-                                                <label for="email" required
-                                                class="leading-7 text-sm text-gray-600">授業日</label>
-                                                <input type="email" id="email" name="email"
-                                                value="{{ $report->class_day }}" readonly
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                        <div class="flex flex-row">
+                                        {{-- 左カラム --}}
+                                            <div class="flex-1">
+
+                                            <div class="p-2 w-1/2 mx-auto">
+                                                <div class="relative">
+                                                    <label for="email" required
+                                                    class="leading-7 text-sm text-gray-600">授業日</label>
+                                                    <input type="email" id="email" name="email"
+                                                    value="{{ $report->class_day }}" readonly
+                                                    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="p-2 w-1/2 mx-auto">
-                                            <div class="relative">
-                                                <label for="email" required
-                                                class="leading-7 text-sm text-gray-600">コマ名</label>
-                                                <input type="email" id="email" name="email"
-                                                value="{{ $report->timetable->name }}" readonly
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                            
+                                            <div class="p-2 w-1/2 mx-auto">
+                                                <div class="relative">
+                                                    <label for="email" required
+                                                    class="leading-7 text-sm text-gray-600">コマ名</label>
+                                                    <input type="email" id="email" name="email"
+                                                    value="{{ $report->timetable->name }}" readonly
+                                                    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="p-2 w-1/2 mx-auto">
-                                            <div class="relative">
-                                                <label for="email" required
-                                                class="leading-7 text-sm text-gray-600">科目名</label>
-                                                <input type="email" id="email" name="email"
-                                                value="{{ $report->subject->name }}" readonly
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                            
+                                            <div class="p-2 w-1/2 mx-auto">
+                                                <div class="relative">
+                                                    <label for="email" required
+                                                    class="leading-7 text-sm text-gray-600">科目名</label>
+                                                    <input type="email" id="email" name="email"
+                                                    value="{{ $report->subject->name }}" readonly
+                                                    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="p-2 w-1/2 mx-auto">
-                                            <div class="relative">
-                                                <label for="email" required
-                                                class="leading-7 text-sm text-gray-600">担当講師</label>
-                                                <input type="email" id="email" name="email"
-                                                value="{{ $report->teacher->name }}" readonly
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                            
+                                            <div class="p-2 w-1/2 mx-auto">
+                                                <div class="relative">
+                                                    <label for="email" required
+                                                    class="leading-7 text-sm text-gray-600">担当講師</label>
+                                                    <input type="email" id="email" name="email"
+                                                    value="{{ $report->teacher->name }}" readonly
+                                                    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="p-2 w-1/2 mx-auto">
-                                            <div class="relative">
-                                                <label for="email" required
-                                                class="leading-7 text-sm text-gray-600">内容</label>
-                                                <textarea type="text" id="report" name="report"
-                                                value="{{ $report->report }}" readonly
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                                {{ $report->report }}
-                                                </textarea>
-                                            </div>
+
                                         </div>
 
+                                        {{-- 右カラム --}}
+                                        <div class="flex-9">
+
+                                            <div class="p-2 w-1/2">
+                                                <div class="relative">
+                                                    <label for="email" required
+                                                    class="leading-7 text-sm text-gray-600">内容</label>
+                                                    <textarea type="text" id="report" name="report"
+                                                    value="{{ $report->report }}" readonly
+                                                    class="min-w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                    {{ $report->report }}
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        </div>
 
 
                                         <div class="p-2 w-full flex justify-around mt-4">
