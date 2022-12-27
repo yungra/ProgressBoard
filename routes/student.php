@@ -15,6 +15,7 @@ use App\Http\Controllers\Student\TeachersController;
 use App\Http\Controllers\Student\GuidanceReportsController;
 use App\Http\Controllers\Student\ChatController;
 use App\Http\Controllers\Student\MyinfoController;
+use App\Http\Controllers\Student\QuestionnaireController;
 
 
 /*
@@ -51,6 +52,13 @@ Route::get('teachers', [TeachersController::class, 'index'])
 
 Route::resource('reports', GuidanceReportsController::class)
 ->middleware('auth:students');
+
+Route::prefix('questionnaire')
+->middleware('auth:students')
+->group(function () {
+    Route::get('edit/{id}', [QuestionnaireController::class, 'edit'])->name('questionnaire.edit');
+    Route::post('update/{id}', [QuestionnaireController::class, 'update'])->name('questionnaire.update');
+});
 
 Route::prefix('chat')
 ->middleware('auth:students')

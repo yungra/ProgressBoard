@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             GuidanceReportSeeder::class,// 開発用
             ChatRoomSeeder::class,// 開発用
             MessageSeeder::class,// 開発用
+            QuestionnaireSeeder::class,// 開発用
         ]);
     }
 }
