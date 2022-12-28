@@ -20,6 +20,12 @@
                               {{-- @method('PUT')   --}}
                               {{-- @csrf --}}
                             <div class="-m-2">
+                                <div class="p-2 w-1/2 mx-auto">
+                                    <div class="relative">
+                                      <label for="img_path" required class="leading-7 text-sm text-gray-600">顔写真</label>
+                                      <img src="{{ Storage::url($myinfo->img_path) }}" >
+                                    </div>
+                                  </div>
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                   <label for="name" required class="leading-7 text-sm text-gray-600">名前</label>

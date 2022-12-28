@@ -32,6 +32,7 @@ class Student extends Authenticatable
     }
 
     protected $fillable = [
+        'img_path',
         'name',
         'email',
         'city_id',

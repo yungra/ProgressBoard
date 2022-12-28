@@ -34,16 +34,39 @@ class MyinfoController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd('test');
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
-            'password' => ['required', 'confirmed', 'min:8'],
+            // 'password' => ['required', 'confirmed', 'min:8'],
         ]);
-        
-        try{
-            DB::transaction(function () use($request, $id) {
-               
+
+        //画像処理
+        $img = $request->file('img_path');
+        if (isset($img)) {
+            $path = $img->store('public');
+            if ($path) {
+                try {
+                    DB::transaction(function () use ($request, $id, $path) {
+
+                        $student = Student::findOrFail($id);
+                        $student->img_path = $path;
+                        $student->name = $request->name;
+                        $student->email = $request->email;
+                        $student->city_id = $request->address;
+                        $student->school_id = $request->school;
+                        $student->desired_school_id = $request->desired_school;
+                        $student->password = Hash::make($request->password);
+                        $student->save();
+                    });
+                } catch (Throwable $e) {
+                    Log::error($e);
+                    throw $e;
+                }
+            }
+        } else {
+            try {
+                DB::transaction(function () use ($request, $id) {
+
                     $student = Student::findOrFail($id);
                     $student->name = $request->name;
                     $student->email = $request->email;
@@ -52,12 +75,13 @@ class MyinfoController extends Controller
                     $student->desired_school_id = $request->desired_school;
                     $student->password = Hash::make($request->password);
                     $student->save();
-        });
-        }catch(Throwable $e){
-            Log::error($e);
-            throw $e;
+                });
+            } catch (Throwable $e) {
+                Log::error($e);
+                throw $e;
+            }
         }
+
         return redirect()->route('student.myinfo.show', ['id' => $id]);
     }
-
 }
