@@ -16,6 +16,7 @@ use App\Http\Controllers\Student\GuidanceReportsController;
 use App\Http\Controllers\Student\ChatController;
 use App\Http\Controllers\Student\MyinfoController;
 use App\Http\Controllers\Student\QuestionnaireController;
+use App\Http\Controllers\Student\TodoController;
 
 
 /*
@@ -66,6 +67,12 @@ Route::prefix('chat')
     Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
     // Route::get('add/{id}', [ChatController::class, 'add'])->name('chat.add');
     Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
+});
+
+Route::prefix('todo')
+->middleware('auth:students')
+->group(function () {
+    Route::get('show', [TodoController::class, 'show'])->name('todo.show');
 });
 
 Route::middleware('auth:students')->group(function () {

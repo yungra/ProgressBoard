@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('student.reports.index')" :active="request()->routeIs('student.reports.index')">
                         指導報告書一覧
                     </x-nav-link>
+                    <x-nav-link :href="route('student.todo.show')" :active="request()->routeIs('student.todo.show')">
+                        todo機能
+                    </x-nav-link>
                 </div>
             </div>
 
