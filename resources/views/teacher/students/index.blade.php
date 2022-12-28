@@ -18,6 +18,9 @@
                                         <tr>
                                             <th
                                                 class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                                                顔写真</th>
+                                            <th
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                                                 名前</th>
                                             <th
                                                 class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
@@ -54,6 +57,7 @@
 
                                         @if ($flag === true)
                                             <tr class="bg-amber-300">
+                                                <td class="md:px-4 py-3"><img src="{{ Storage::url($student->img_path)}}" width="60px"></td>
                                                 <td class="md:px-4 py-3">{{ $student->name }}</td>
                                                 <td class="md:px-4 py-3">{{ $student->email }}</td>
                                                 <td class="md:px-4 py-3">
@@ -71,6 +75,7 @@
                                             </tr>
                                         @else
                                             <tr>
+                                                <td class="md:px-4 py-3"><img src="{{ Storage::url($student->img_path)}}" width="60px"></td>
                                                 <td class="md:px-4 py-3">{{ $student->name }}</td>
                                                 <td class="md:px-4 py-3">{{ $student->email }}</td>
                                                 <td class="md:px-4 py-3">

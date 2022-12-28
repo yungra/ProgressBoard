@@ -22,6 +22,7 @@ class Teacher extends Authenticatable
     }
 
     protected $fillable = [
+        'img_path',
         'name',
         'email',
         'password',

@@ -22,6 +22,12 @@
                             <div class="-m-2">
                               <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
+                                  <label for="img_path" required class="leading-7 text-sm text-gray-600">顔写真</label>
+                                  <img src="{{ Storage::url($myinfo->img_path) }}" >
+                                </div>
+                              </div>
+                              <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
                                   <label for="name" required class="leading-7 text-sm text-gray-600">名前</label>
                                   <input type="text" id="name" name="name" value="{{ $myinfo->name }}" readonly class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
