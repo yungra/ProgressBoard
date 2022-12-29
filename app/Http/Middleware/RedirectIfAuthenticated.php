@@ -36,7 +36,7 @@ class RedirectIfAuthenticated
         }
 
         if(Auth::guard(self::GUARD_STUDENT)->check() && $request->routeIs('student.*')){
-            return redirect(RouteServiceProvider::STUDENT_HOME );
+            return redirect(RouteServiceProvider::STUDENT_HOME);
         }
 
         if(Auth::guard(self::GUARD_TEACHER)->check() && $request->routeIs('teacher.*')){

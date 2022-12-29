@@ -42,6 +42,7 @@ sail artisan key:generate
 ## データベースのマイグレーション
 ```
 sail artisan migrate
+//すべてのマイグレーションをリセットして、データベースを初期化する
 sail artisan migrate:fresh --seed
 ```
 
