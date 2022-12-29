@@ -44,54 +44,64 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($students as $student)
-                                            @php $flag = false; @endphp
+                                        @foreach ($students as $i => $student)
+                                            @php $flag[$i] = false; @endphp
                                             @foreach ($student->guidance_reports as $s)
                                                 @if ($s->teacher_id === $teacher_id)
                                                     @php
-                                                        $flag = true;
+                                                        $flag[$i] = true;
                                                     @endphp
                                                 @break
                                             @endif
                                         @endforeach
-
-                                        @if ($flag === true)
-                                            <tr class="bg-amber-300">
-                                                <td class="md:px-4 py-3"><img src="{{ Storage::url($student->img_path)}}" width="60px"></td>
-                                                <td class="md:px-4 py-3">{{ $student->name }}</td>
-                                                <td class="md:px-4 py-3">{{ $student->email }}</td>
-                                                <td class="md:px-4 py-3">
-                                                    {{ $student->address->prefecture->name }}{{ $student->address->name }}
-                                                </td>
-                                                <td class="md:px-4 py-3">{{ $student->school->name }}</td>
-                                                <td class="md:px-4 py-3">{{ $student->desired_school->name }}
-                                                </td>
-                                                <td class="md:px-4 py-3">{{ $student->created_at }}</td>
-                                                <td class="px-4 text-center">
-                                                    <button
-                                                        onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
-                                                        class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
-                                                </td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <td class="md:px-4 py-3"><img src="{{ Storage::url($student->img_path)}}" width="60px"></td>
-                                                <td class="md:px-4 py-3">{{ $student->name }}</td>
-                                                <td class="md:px-4 py-3">{{ $student->email }}</td>
-                                                <td class="md:px-4 py-3">
-                                                    {{ $student->address->prefecture->name }}{{ $student->address->name }}
-                                                </td>
-                                                <td class="md:px-4 py-3">{{ $student->school->name }}</td>
-                                                <td class="md:px-4 py-3">{{ $student->desired_school->name }}</td>
-                                                <td class="md:px-4 py-3">{{ $student->created_at }}</td>
-                                                <td class="px-4 text-center">
-                                                    <button
-                                                        onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
-                                                        class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
-                                                </td>
-                                            </tr>
-                                        @endif
                                     @endforeach
+
+                                    @foreach ($students as $i => $student)
+                                    @if ($flag[$i] === true)
+                                    <tr class="bg-amber-300">
+                                        <td class="md:px-4 py-3"><img
+                                                src="{{ Storage::url($student->img_path) }}" width="60px">
+                                        </td>
+                                        <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                        <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                        <td class="md:px-4 py-3">
+                                            {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                        </td>
+                                        <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                        <td class="md:px-4 py-3">{{ $student->desired_school->name }}
+                                        </td>
+                                        <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                        <td class="px-4 text-center">
+                                            <button
+                                                onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                                class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @foreach ($students as $i => $student)
+                                    @if ($flag[$i] === false)
+                                    <tr>
+                                        <td class="md:px-4 py-3"><img
+                                            src="{{ Storage::url($student->img_path) }}" width="60px">
+                                        </td>
+                                        <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                        <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                        <td class="md:px-4 py-3">
+                                            {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                        </td>
+                                        <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                        <td class="md:px-4 py-3">{{ $student->desired_school->name }}</td>
+                                        <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                        <td class="px-4 text-center">
+                                            <button
+                                            onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                            class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    
 
                                 </tbody>
                             </table>
