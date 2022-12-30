@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\TeachersController;
+use App\Http\Controllers\TestController;
 
 
 /*
@@ -25,6 +26,9 @@ use App\Http\Controllers\Admin\TeachersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/test', TestController::class, 'index');
 
 Route::get('/', function () {
     return view('admin.welcome');

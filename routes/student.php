@@ -43,7 +43,7 @@ Route::get('/dashboard', function () {
 Route::prefix('myinfo')
 ->middleware('auth:students')
 ->group(function () {
-    Route::get('show/{id}', [MyinfoController::class, 'show'])->name('myinfo.show');
+    Route::get('show', [MyinfoController::class, 'show'])->name('myinfo.show');
     Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
     Route::post('update/{id}', [MyinfoController::class, 'update'])->name('myinfo.update');
 });

@@ -14,7 +14,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('student.myinfo.show', ['id'=>Auth::id()])" :active="request()->routeIs('student.myinfo.show')">
+                    <x-nav-link :href="route('student.myinfo.show')" :active="request()->routeIs('student.myinfo.show')">
                         登録情報
                     </x-nav-link>
                     <x-nav-link :href="route('student.teachers.index')" :active="request()->routeIs('student.teachers.index')">
