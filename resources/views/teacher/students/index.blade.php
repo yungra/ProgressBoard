@@ -44,7 +44,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($true as $student)
+                                        {{-- @foreach ($true as $student)
                                             <tr class="bg-amber-300">
                                                 <td class="md:px-4 py-3"><img
                                                         src="{{ Storage::url($student->img_path) }}" width="60px">
@@ -64,10 +64,10 @@
                                                         class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
 
 
-                                        @foreach ($false as $student)
+                                        @foreach ($studentPaginate as $student)
                                             <tr>
                                                 <td class="md:px-4 py-3"><img
                                                         src="{{ Storage::url($student->img_path) }}" width="60px">
@@ -91,7 +91,7 @@
 
                                     </tbody>
                                 </table>
-                                {{ $students->links() }}
+                                {{ $studentPaginate->links() }}
                             </div>
 
                         </div>
