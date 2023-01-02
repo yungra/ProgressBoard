@@ -44,7 +44,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($true as $student)
+                                        {{-- @foreach ($true as $student)
                                             <tr class="bg-amber-300">
                                                 <td class="md:px-4 py-3"><img
                                                         src="{{ Storage::url($student->img_path) }}" width="60px">
@@ -64,13 +64,65 @@
                                                         class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
 
-
-                                        @foreach ($false as $student)
+                                        {{-- @php
+                                                dd($true_count);
+                                            @endphp  --}}
+                                        @foreach ($studentPaginate as $student)
+                                            {{-- ページ内で、全て条件を満たす場合 --}}
+                                            @if ($true_count >= $num * $page)
+                                                <tr class="bg-amber-300">
+                                                    <td class="md:px-4 py-3"><img
+                                                            src="{{ Storage::url($student->img_path) }}" width="60px">
+                                                    </td>
+                                                    <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                                    <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                                    <td class="md:px-4 py-3">
+                                                        {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                                    </td>
+                                                    <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                                    <td class="md:px-4 py-3">{{ $student->desired_school->name }}
+                                                    </td>
+                                                    <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                                    <td class="px-4 text-center">
+                                                        <button
+                                                            onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                                            class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                                    </td>
+                                                </tr>
+                                                @continue
+                                                {{-- ページ内で、一部が条件を満たす場合 --}}
+                                                {{-- ページ内に条件を満たすものが存在するか --}}
+                                            @elseif ($true_count > $num * ($page - 1))
+                                                @if ($loop->iteration <= $true_count - $num * ($page - 1))
+                                                    <tr class="bg-amber-300">
+                                                        <td class="md:px-4 py-3"><img
+                                                                src="{{ Storage::url($student->img_path) }}"
+                                                                width="60px">
+                                                        </td>
+                                                        <td class="md:px-4 py-3">{{ $student->name }}</td>
+                                                        <td class="md:px-4 py-3">{{ $student->email }}</td>
+                                                        <td class="md:px-4 py-3">
+                                                            {{ $student->address->prefecture->name }}{{ $student->address->name }}
+                                                        </td>
+                                                        <td class="md:px-4 py-3">{{ $student->school->name }}</td>
+                                                        <td class="md:px-4 py-3">{{ $student->desired_school->name }}
+                                                        </td>
+                                                        <td class="md:px-4 py-3">{{ $student->created_at }}</td>
+                                                        <td class="px-4 text-center">
+                                                            <button
+                                                                onclick="location.href='{{ route('teacher.chat.show', $student->id) }}'"
+                                                                class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                                        </td>
+                                                    </tr>
+                                                    @continue
+                                                @endif
+                                            @endif
                                             <tr>
                                                 <td class="md:px-4 py-3"><img
                                                         src="{{ Storage::url($student->img_path) }}" width="60px">
+
                                                 </td>
                                                 <td class="md:px-4 py-3">{{ $student->name }}</td>
                                                 <td class="md:px-4 py-3">{{ $student->email }}</td>
@@ -91,7 +143,7 @@
 
                                     </tbody>
                                 </table>
-                                {{ $students->links() }}
+                                {{ $studentPaginate->links() }}
                             </div>
 
                         </div>

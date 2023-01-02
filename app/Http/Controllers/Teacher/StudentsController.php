@@ -11,6 +11,7 @@ use Throwable;
 use Illuminate\Support\Facades\Log;
 use App\Models\School;
 use App\Models\Prefecture;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,10 +22,10 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
-        ->paginate(3);
+        ->get();
         // dd($students);
         $teacher_id = Auth::id();
         $true = array();
@@ -48,8 +49,27 @@ class StudentsController extends Controller
                 array_push($false, $student);
             }
         }
-        // dd($false);
-        return view('teacher.students.index', compact('students', 'true', 'false'));
+        //条件に合うものの件数
+        $true_count = count($true);
+        //1ページに表示するデータ数
+        $num = 3;
+        //現在のページ番号
+        $page = $request->page;
+        //コレクション型、ソート済みの生徒データ
+        $students = collect(array_merge($true, $false));
+        $studentPaginate = new LengthAwarePaginator(
+            //1ページに表示するデータ
+            $students->forPage($request->page, $num),//forPage→(現在のページ、1ページあたりの件数)
+            //全てのページを合わせた全件数
+            $students->count(),
+            //1ページに表示する数
+            $num,
+            //現在のページ番号
+            $page,
+            //ペジネーション押下時のURL
+            ['path' => $request->url()]
+        );
+        return view('teacher.students.index', compact('studentPaginate', 'true_count', 'num', 'page'));
     }
 
 
