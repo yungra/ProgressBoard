@@ -21,6 +21,11 @@ class Teacher extends Authenticatable
         return $this->belongsTo(School::class, 'university_id');
     }
 
+    public function guidance_reports()
+    {
+        return $this->hasMany(GuidanceReport::class);
+    }
+
     protected $fillable = [
         'img_path',
         'name',

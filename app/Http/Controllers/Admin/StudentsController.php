@@ -23,9 +23,11 @@ class StudentsController extends Controller
         
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::with('address.prefecture', 'school', 'desired_school')->paginate(3);
+        $students = Student::with('address.prefecture', 'school', 'desired_school')
+        ->searchKeyword($request->keyword)
+        ->paginate($request->pagination ?? 2);
         // dd($students);
         return view('admin.students.index', compact('students'));
     }
@@ -132,8 +134,10 @@ class StudentsController extends Controller
         return redirect()->route('admin.students.index');
     }
 
-    public function expiredStudentIndex(){
-        $expiredStudents = Student::onlyTrashed()->get();
+    public function expiredStudentIndex(Request $request){
+        $expiredStudents = Student::onlyTrashed()
+        ->searchKeyword($request->keyword)
+        ->paginate($request->pagination ?? 2);
         return view('admin.students.expired-students', compact('expiredStudents'));
     }
     

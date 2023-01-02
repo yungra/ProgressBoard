@@ -23,10 +23,13 @@ class GuidanceReportsController extends Controller
         $this->middleware('auth:students');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $id = auth()->id();
-        $reports = GuidanceReport::where('student_id' ,$id)->with('student', 'teacher', 'timetable', 'subject')->paginate(3);
+        $reports = GuidanceReport::where('student_id' ,$id)
+        ->searchDate($request->date)
+        ->with('student', 'teacher', 'timetable', 'subject')
+        ->paginate($request->pagination ?? 2);
         return view('student.reports.index', compact('reports'));
     }
 
