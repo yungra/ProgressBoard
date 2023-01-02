@@ -21,9 +21,11 @@ class TeachersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::with('address.prefecture', 'university')->paginate(3);
+        $teachers = Teacher::with('address.prefecture', 'university')
+        ->searchKeyword($request->keyword)
+        ->paginate($request->pagination ?? 2);
         return view('teacher.teachers.index', compact('teachers'));
     }
 

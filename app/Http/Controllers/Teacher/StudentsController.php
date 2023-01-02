@@ -25,6 +25,7 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
+        ->searchKeyword($request->keyword)
         ->get();
         // dd($students);
         $teacher_id = Auth::id();

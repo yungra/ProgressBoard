@@ -4,24 +4,21 @@
             生徒一覧
         </h2>
         <form method="GET" action={{ route('teacher.students.index') }}>
-        <span class="text-sm">表示件数</span><br>
-                            <select id="pagination" name="pagination">
-                                <option value="2"
-                                    @if(\Request::get('pagination') === '2')
-                                    selected
-                                    @endif>2件
-                                </option>
-                                <option value="5"
-                                    @if(\Request::get('pagination') === '5')
-                                    selected
-                                    @endif>5件
-                                </option>
-                                <option value="10"
-                                    @if(\Request::get('pagination') === '10')
-                                    selected
-                                    @endif>10件
-                                </option>
-                            </select>
+            <div class="flex space-x-2 items-center">
+                <div><input name="keyword" class="border border-gray-500 py-2" placeholder="生徒名で検索"></div>
+                <div><button
+                        class="ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">検索する</button>
+                </div>
+            </div>
+            <span class="text-sm">表示件数</span><br>
+            <select id="pagination" name="pagination">
+                <option value="2" @if (\Request::get('pagination') === '2') selected @endif>2件
+                </option>
+                <option value="5" @if (\Request::get('pagination') === '5') selected @endif>5件
+                </option>
+                <option value="10" @if (\Request::get('pagination') === '10') selected @endif>10件
+                </option>
+            </select>
         </form>
     </x-slot>
 
@@ -164,8 +161,8 @@
                                     </tbody>
                                 </table>
                                 {{ $studentPaginate->appends([
-                                    'pagination' => \Request::get('pagination')
-                                ])->links() }}
+                                        'pagination' => \Request::get('pagination'),
+                                    ])->links() }}
                             </div>
 
                         </div>
@@ -177,9 +174,8 @@
     </div>
     <script>
         const paginate = document.getElementById('pagination')
-        paginate.addEventListener('change', function(){
+        paginate.addEventListener('change', function() {
             this.form.submit()
         })
-    
     </script>
 </x-app-layout>
