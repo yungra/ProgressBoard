@@ -3,6 +3,26 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             生徒一覧
         </h2>
+        <form method="GET" action={{ route('teacher.students.index') }}>
+        <span class="text-sm">表示件数</span><br>
+                            <select id="pagination" name="pagination">
+                                <option value="2"
+                                    @if(\Request::get('pagination') === '2')
+                                    selected
+                                    @endif>2件
+                                </option>
+                                <option value="5"
+                                    @if(\Request::get('pagination') === '5')
+                                    selected
+                                    @endif>5件
+                                </option>
+                                <option value="10"
+                                    @if(\Request::get('pagination') === '10')
+                                    selected
+                                    @endif>10件
+                                </option>
+                            </select>
+        </form>
     </x-slot>
 
     <div class="py-12">
@@ -143,7 +163,9 @@
 
                                     </tbody>
                                 </table>
-                                {{ $studentPaginate->links() }}
+                                {{ $studentPaginate->appends([
+                                    'pagination' => \Request::get('pagination')
+                                ])->links() }}
                             </div>
 
                         </div>
@@ -153,4 +175,11 @@
             </div>
         </div>
     </div>
+    <script>
+        const paginate = document.getElementById('pagination')
+        paginate.addEventListener('change', function(){
+            this.form.submit()
+        })
+    
+    </script>
 </x-app-layout>

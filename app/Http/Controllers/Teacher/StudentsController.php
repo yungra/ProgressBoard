@@ -52,7 +52,7 @@ class StudentsController extends Controller
         //条件に合うものの件数
         $true_count = count($true);
         //1ページに表示するデータ数
-        $num = 3;
+        $num = $request->pagination ?? 2;
         //現在のページ番号
         $page = $request->page;
         //コレクション型、ソート済みの生徒データ
