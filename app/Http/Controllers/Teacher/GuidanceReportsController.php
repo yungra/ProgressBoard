@@ -20,10 +20,13 @@ class GuidanceReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $id = Auth::id();
-        $reports = GuidanceReport::where('teacher_id', '=', $id)->with('student', 'timetable', 'subject')->get();
+        $reports = GuidanceReport::where('teacher_id', '=', $id)
+        ->searchDate($request->date)
+        ->with('student', 'timetable', 'subject')
+        ->paginate($request->pagination ?? 2);
         
         return view('teacher.reports.index', compact('reports'));
     }

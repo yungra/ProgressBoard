@@ -21,9 +21,11 @@ class TeachersController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::with('address.prefecture', 'university')->paginate(3);
+        $teachers = Teacher::with('address.prefecture', 'university')
+        ->searchKeyword($request->keyword)
+        ->paginate($request->pagination ?? 2);
         return view('admin.teachers.index', compact('teachers'));
     }
 
@@ -127,8 +129,10 @@ class TeachersController extends Controller
         return redirect()->route('admin.teachers.index');
     }
 
-    public function expiredTeacherIndex(){
-        $expiredTeachers = Teacher::onlyTrashed()->get();
+    public function expiredTeacherIndex(Request $request){
+        $expiredTeachers = Teacher::onlyTrashed()
+        ->searchKeyword($request->keyword)
+        ->paginate($request->pagination ?? 2);
         return view('admin.teachers.expired-teachers', compact('expiredTeachers'));
     }
     

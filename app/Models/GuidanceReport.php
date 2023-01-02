@@ -38,4 +38,18 @@ class GuidanceReport extends Model
         'report',
         'created_at'
     ];
+
+    public function scopeSearchDate($query, $date)
+    {
+        if(!is_null($date))
+        {
+           
+           $query->where('guidance_reports.class_day', $date);
+
+           return $query;  
+
+        } else {
+            return;
+        }
+    }
 }

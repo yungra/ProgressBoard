@@ -25,6 +25,7 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
+        ->searchKeyword($request->keyword)
         ->get();
         // dd($students);
         $teacher_id = Auth::id();
@@ -52,7 +53,7 @@ class StudentsController extends Controller
         //条件に合うものの件数
         $true_count = count($true);
         //1ページに表示するデータ数
-        $num = 3;
+        $num = $request->pagination ?? 2;
         //現在のページ番号
         $page = $request->page;
         //コレクション型、ソート済みの生徒データ
