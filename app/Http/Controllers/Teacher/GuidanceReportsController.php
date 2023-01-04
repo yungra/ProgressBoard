@@ -24,10 +24,10 @@ class GuidanceReportsController extends Controller
     {
         $id = Auth::id();
         $reports = GuidanceReport::where('teacher_id', '=', $id)
-        ->searchDate($request->date)
-        ->with('student', 'timetable', 'subject')
-        ->paginate($request->pagination ?? 2);
-        
+            ->searchDate($request->date)
+            ->with('student', 'timetable', 'subject', 'questionnaire')
+            ->paginate($request->pagination ?? 2);
+
         return view('teacher.reports.index', compact('reports'));
     }
 
@@ -57,7 +57,7 @@ class GuidanceReportsController extends Controller
         //     'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
         //     'password' => ['required', 'confirmed', 'min:8'],
         // ]);
-        
+
         GuidanceReport::create([
             'student_id' => $request->student_id,
             'class_day' => $request->class_day,
@@ -111,25 +111,24 @@ class GuidanceReportsController extends Controller
         $request->validate([
             'report' => ['required', 'string'],
         ]);
-        
-        try{
-            DB::transaction(function () use($request, $id) {
-               
-                    $report = GuidanceReport::findOrFail($id);
-                    $report->student_id = $request->student;
-                    $report->class_day = $request->class_day;
-                    $report->timetable_id = $request->timetable;
-                    $report->subject_id = $request->subject;
-                    $report->teacher_id = $request->teacher;
-                    $report->report = $request->report;
-                    $report->save();
-        });
-        }catch(Throwable $e){
+
+        try {
+            DB::transaction(function () use ($request, $id) {
+
+                $report = GuidanceReport::findOrFail($id);
+                $report->student_id = $request->student;
+                $report->class_day = $request->class_day;
+                $report->timetable_id = $request->timetable;
+                $report->subject_id = $request->subject;
+                $report->teacher_id = $request->teacher;
+                $report->report = $request->report;
+                $report->save();
+            });
+        } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
         return redirect()->route('teacher.reports.index');
-
     }
 
     /**

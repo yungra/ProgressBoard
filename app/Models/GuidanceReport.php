@@ -29,6 +29,11 @@ class GuidanceReport extends Model
         return $this->belongsTo(Subject::class);
     }
 
+    public function questionnaire()
+    {
+        return $this->hasOne(Questionnaire::class);
+    }
+
     protected $fillable = [
         'student_id',
         'teacher_id',
@@ -41,13 +46,11 @@ class GuidanceReport extends Model
 
     public function scopeSearchDate($query, $date)
     {
-        if(!is_null($date))
-        {
-           
-           $query->where('guidance_reports.class_day', $date);
+        if (!is_null($date)) {
 
-           return $query;  
+            $query->where('guidance_reports.class_day', $date);
 
+            return $query;
         } else {
             return;
         }
