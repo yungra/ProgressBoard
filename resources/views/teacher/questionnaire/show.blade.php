@@ -18,7 +18,7 @@
                             <div class="flex">
 
                                 {{-- 左カラム --}}
-                                <div>
+                                <div class="w-1/3">
                                     <div class="p-2 w-1/2 mx-auto">
                                         <div class="relative">
                                             <label for="email" required
@@ -61,7 +61,7 @@
                                 </div>
 
                                 {{-- 右カラム --}}
-                                <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                                <div class="w-2/3 mx-auto">
                                     <div class="-m-2">
                                         <div class="p-2 w-1/2 mx-auto">
                                             <div class="relative">
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="p-2 w-1/2 mx-auto">
+                                        <div class="p-2 w-full mx-auto">
                                             <div class="relative">
                                                 <label for="free" required
                                                     class="leading-7 text-sm text-gray-600">自由記述</label>

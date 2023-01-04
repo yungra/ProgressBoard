@@ -52,22 +52,24 @@ class Student extends Authenticatable
 
     public function scopeSearchKeyword($query, $keyword)
     {
-        if(!is_null($keyword))
-        {
-           //全角スペースを半角に
-           $spaceConvert = mb_convert_kana($keyword,'s');
+        if (!is_null($keyword)) {
+            //全角スペースを半角に
+            $spaceConvert = mb_convert_kana($keyword, 's');
 
-           //空白で区切る
-           $keywords = preg_split('/[\s]+/', $spaceConvert,-1,PREG_SPLIT_NO_EMPTY);
+            //空白で区切る
+            //preg_split(検索するパターン,入力文字列,文字列を返す制限,フラグ)
+            //PREG_SPLIT_NO_EMPTY→空文字列でないものが返される
+            $keywords = preg_split('/[\s]+/', $spaceConvert, -1, PREG_SPLIT_NO_EMPTY);
+            //             「/（スラッシュ）」は、「正規表現」では、特に意味を持っていません。
+            // 「正規表現」のコード・パターンの前後において、明確化する「デリミタ」として使わている。
+            // 「デリミタ（Delimiter）」とは、「正規表現」のコード・パターンの前後を囲むことで、パターンの範囲を明示する役割をする記号のこと。
 
-           //単語をループで回す
-           foreach($keywords as $word)
-           {
-               $query->where('students.name','like','%'.$word.'%');
-           }
+            //単語をループで回す
+            foreach ($keywords as $word) {
+                $query->where('students.name', 'like', '%' . $word . '%');
+            }
 
-           return $query;  
-
+            return $query;
         } else {
             return;
         }

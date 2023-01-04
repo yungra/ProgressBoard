@@ -63,7 +63,7 @@
 
                                         @foreach ($studentPaginate as $student)
                                             {{-- ページ内で、全て条件を満たす場合 --}}
-                                            @if ($true_count >= $num * $page)
+                                            @if ($target_count >= $num * $page)
                                                 <tr class="bg-amber-300">
                                                     <td class="md:px-4 py-3"><img
                                                             src="{{ Storage::url($student->img_path) }}" width="60px">
@@ -86,8 +86,8 @@
                                                 @continue
                                                 {{-- ページ内で、一部が条件を満たす場合 --}}
                                                 {{-- ページ内に条件を満たすものが存在するか --}}
-                                            @elseif ($true_count > $num * ($page - 1))
-                                                @if ($loop->iteration <= $true_count - $num * ($page - 1))
+                                            @elseif ($target_count > $num * ($page - 1))
+                                                @if ($loop->iteration <= $target_count - $num * ($page - 1))
                                                     <tr class="bg-amber-300">
                                                         <td class="md:px-4 py-3"><img
                                                                 src="{{ Storage::url($student->img_path) }}"

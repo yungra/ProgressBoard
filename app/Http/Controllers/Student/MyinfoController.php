@@ -18,9 +18,7 @@ class MyinfoController extends Controller
     public function show()
     {
         $id = Auth::id();
-        $data = Student::where('id', '=', $id)->with('address.prefecture', 'school')->get();
-        $myinfo = $data[0];
-        // dd($myinfo);
+        $myinfo = Student::where('id', '=', $id)->with('address.prefecture', 'school')->first();
         return view('student.myinfo.show', compact('myinfo'));
     }
 
