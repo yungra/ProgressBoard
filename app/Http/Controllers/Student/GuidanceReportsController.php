@@ -26,10 +26,11 @@ class GuidanceReportsController extends Controller
     public function index(Request $request)
     {
         $id = auth()->id();
-        $reports = GuidanceReport::where('student_id' ,$id)
-        ->searchDate($request->date)
-        ->with('student', 'teacher', 'timetable', 'subject')
-        ->paginate($request->pagination ?? 2);
+        $reports = GuidanceReport::where('student_id', $id)
+            ->searchDate($request->date)
+            ->with('student', 'teacher', 'timetable', 'subject', 'questionnaire')
+            ->paginate($request->pagination ?? 2);
+        // dd($reports[0]->questionnaire);
         return view('student.reports.index', compact('reports'));
     }
 
@@ -39,5 +40,4 @@ class GuidanceReportsController extends Controller
         // dd($report);
         return view('student.reports.show', compact('report'));
     }
-
 }
