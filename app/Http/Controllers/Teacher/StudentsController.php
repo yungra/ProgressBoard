@@ -25,42 +25,39 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
-        ->searchKeyword($request->keyword)
-        ->get();
+            ->searchKeyword($request->keyword)
+            ->get();
         // dd($students);
         $teacher_id = Auth::id();
-        $true = array();
-        $false = array();
+        $target = array();
+        $nontarget = array();
         // 生徒を一人ひとり見ていく
-        foreach($students as $student)
-        {
+        foreach ($students as $student) {
             $flag = false;
             // 生徒に紐づく指導報告書を一つひとつ見ていく
-            foreach($student->guidance_reports as $s)
-            {
+            foreach ($student->guidance_reports as $s) {
                 // 指導報告書の中で、ログイン講師と紐づくものがあるか
-                if($s->teacher_id === $teacher_id)
-                {
-                    array_push($true, $student);
+                if ($s->teacher_id === $teacher_id) {
+                    array_push($target, $student);
                     $flag = true;
                     break;
                 }
             }
-            if(!$flag){
-                array_push($false, $student);
+            if (!$flag) {
+                array_push($nontarget, $student);
             }
         }
         //条件に合うものの件数
-        $true_count = count($true);
+        $target_count = count($target);
         //1ページに表示するデータ数
         $num = $request->pagination ?? 2;
         //現在のページ番号
-        $page = $request->page;
+        $page = $request->page ?? 1;
         //コレクション型、ソート済みの生徒データ
-        $students = collect(array_merge($true, $false));
+        $students = collect(array_merge($target, $nontarget));
         $studentPaginate = new LengthAwarePaginator(
             //1ページに表示するデータ
-            $students->forPage($request->page, $num),//forPage→(現在のページ、1ページあたりの件数)
+            $students->forPage($request->page, $num), //forPage→(現在のページ、1ページあたりの件数)
             //全てのページを合わせた全件数
             $students->count(),
             //1ページに表示する数
@@ -70,8 +67,6 @@ class StudentsController extends Controller
             //ペジネーション押下時のURL
             ['path' => $request->url()]
         );
-        return view('teacher.students.index', compact('studentPaginate', 'true_count', 'num', 'page'));
+        return view('teacher.students.index', compact('studentPaginate', 'target_count', 'num', 'page'));
     }
-
-
 }

@@ -21,7 +21,7 @@
 
                                     <div class="flex flex-row w-full">
                                         {{-- 左カラム --}}
-                                        <div class="flex-9">
+                                        <div class="w-1/3">
 
                                             <div class="w-2/3 mx-auto">
                                                 <div class="relative">
@@ -81,7 +81,7 @@
                                         </div>
 
                                         {{-- 右カラム --}}
-                                        <div class="flex-1">
+                                        <div class="w-2/3">
 
                                             <div class="p-2 w-full ml-20">
                                                 <div class="relative">

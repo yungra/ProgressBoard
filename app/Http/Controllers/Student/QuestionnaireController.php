@@ -22,12 +22,11 @@ class QuestionnaireController extends Controller
     {
         $flag = false;
         $questionnaire = Questionnaire::where('guidance_report_id', '=', $report_id)
-            ->get();
-        $guidance_report = GuidanceReport::where('id', '=', $report_id)
-            ->get();
-        $report = $guidance_report[0];
+            ->first();
+        $report = GuidanceReport::where('id', '=', $report_id)
+            ->first();
         // 空なら
-        if ($questionnaire->isEmpty()) {
+        if (empty($questionnaire)) {
             // dd('空だよ');
             $questionnaire = new Questionnaire();
             $questionnaire->fill([
@@ -42,7 +41,6 @@ class QuestionnaireController extends Controller
             return view('student.questionnaire.edit', compact('report', 'questionnaire', 'flag'));
         } else {
             $flag = true;
-            $questionnaire = $questionnaire[0];
             return view('student.questionnaire.edit', compact('report', 'questionnaire', 'flag'));
         }
     }

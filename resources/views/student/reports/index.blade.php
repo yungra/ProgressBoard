@@ -5,7 +5,8 @@
         </h2>
         <form method="GET" action={{ route('student.reports.index') }}>
             <div class="flex space-x-2 items-center">
-                <div><input type="date" name="date" class="border border-gray-500 py-2" placeholder="生徒名で検索"></div>
+                <div><input type="text" name="keyword" class="border border-gray-500 py-2" placeholder="講師名で検索"></div>
+                <div><input type="date" name="date" class="border border-gray-500 py-2"></div>
                 <div><button
                         class="ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">検索する</button>
                 </div>

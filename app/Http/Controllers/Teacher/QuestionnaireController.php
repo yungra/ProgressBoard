@@ -22,12 +22,10 @@ class QuestionnaireController extends Controller
     public function show($report_id)
     {
         $questionnaire = Questionnaire::where('guidance_report_id', '=', $report_id)
-            ->get();
-        $guidance_report = GuidanceReport::where('id', '=', $report_id)
-            ->get();
-        $report = $guidance_report[0];
+            ->first();
+        $report = GuidanceReport::where('id', '=', $report_id)
+            ->first();
 
-        $questionnaire = $questionnaire[0];
         return view('teacher.questionnaire.show', compact('report_id', 'questionnaire', 'report'));
     }
 }
