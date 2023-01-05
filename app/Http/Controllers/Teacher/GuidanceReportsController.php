@@ -23,7 +23,35 @@ class GuidanceReportsController extends Controller
     public function index(Request $request)
     {
         $id = Auth::id();
+        $students = Student::searchKeyword($request->keyword)->get();
+        $keyword = array();
+        foreach ($students as $student) {
+            array_push($keyword, $student->id);
+        }
+        // dd(GuidanceReport::where('teacher_id', '=', $id)
+        //     ->where('student_id', '=', 2)->get());
         $reports = GuidanceReport::where('teacher_id', '=', $id)
+            ->whereHas('student', function ($query) use ($keyword) {
+                foreach ($keyword as $word) {
+                    echo ('[' . $word . ']<br>');
+                    $query->where('student_id', '=', $word);
+                }
+
+                // for ($i = 0; $i < 2; $i++) {
+                //     $query->where('student_id', $i);
+                // }
+
+                // $query->where('student_id', 1);
+                // $query->where('student_id', 2);
+            })->get();
+        dd($reports);
+
+        foreach ($reports as $report) {
+            echo ('レポート:' . $report->id . '<br>');
+        }
+
+        $reports = GuidanceReport::where('teacher_id', '=', $id)
+            ->searchKeyword($keyword)
             ->searchDate($request->date)
             ->with('student', 'timetable', 'subject', 'questionnaire')
             ->paginate($request->pagination ?? 2);
