@@ -17,50 +17,50 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $id = Auth::id();
-        $chat_rooms = ChatRoom::where('teacher_id', '=', $id)
-        ->with('student', 'messages')
-        ->paginate(3);
-        return view('teacher.chats.index', compact('chat_rooms'));
-    }
+    // public function index()
+    // {
+    //     $id = Auth::id();
+    //     $chat_rooms = ChatRoom::where('teacher_id', '=', $id)
+    //     ->with('student', 'messages')
+    //     ->paginate(3);
+    //     return view('teacher.chats.index', compact('chat_rooms'));
+    // }
 
     public function show($id)
     {
         $chat_room = ChatRoom::where('student_id', '=', $id)
-        ->where('teacher_id', '=', Auth::id())
-        ->with('messages')
-        ->first();
-
+            ->where('teacher_id', '=', Auth::id())
+            ->with('messages', 'student', 'teacher')
+            ->first();
+        // dd($chat_room);
         // チャットルームが既に存在してるか判定
-        if($chat_room){
+        if ($chat_room) {
             // dd($chat_room->messages);
-        }else{
+        } else {
             $chat_room = ChatRoom::create([
                 'student_id' => $id,
                 'teacher_id' => Auth::id(),
             ]);
         }
-        $student = Student::where('id', '=', $id)->first();
+        // $student = Student::where('id', '=', $id)->first();
         $messages = Message::get();
-        return view('teacher.chats.show', compact('student', 'chat_room'));
+        return view('teacher.chats.show', compact('chat_room'));
     }
 
     public function send(Request $request, $id)
     {
         $chat_room = ChatRoom::where('student_id', '=', $id)
-        ->where('teacher_id', '=', Auth::id())->first();
+            ->where('teacher_id', '=', Auth::id())->first();
         $chat_room_id = $chat_room->id;
 
         $content = $request->message;
-        
+
         Message::create([
             'chat_room_id' => $chat_room_id,
             'is_student' => 0,
             'content' => $content,
         ]);
-        return redirect()->route('teacher.chat.show',$id);
+        return redirect()->route('teacher.chat.show', $id);
     }
 
     /**
