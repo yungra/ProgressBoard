@@ -44,16 +44,13 @@ class GuidanceReport extends Model
         'created_at'
     ];
 
-    public function scopeSearchKeyword($query, $keyword)
+    public function scopeSearchKeywordId($query, $keyword_id)
     {
-        if (!is_null($keyword)) {
+        if (!is_null($keyword_id)) {
 
-            //単語をループで回す
-            foreach ($keyword as $word) {
-                $query->where('guidance_reports.student_id', $word);
-                // echo ('検索id:' . $word . '<br>');
-                // echo ($query->get());
-                // echo ('<br>');
+            //コントローラから渡されたIDに対応するカラムを検索
+            foreach ($keyword_id as $id) {
+                $query->where('guidance_reports.student_id', $id);
             }
 
             return $query;

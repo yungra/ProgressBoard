@@ -22,39 +22,40 @@ class GuidanceReportsController extends Controller
      */
     public function index(Request $request)
     {
+        //ログインしてる講師のIDを取得
         $id = Auth::id();
+
+        //検索欄に入力された「生徒名」から、該当する指導報告書を取得したい。
+        //ただ今回、指導報告書テーブルには「student_id」しかなく、生徒名でのカラムがない。
+        //そのためまずは生徒テーブルから生徒名で検索キーワードに該当する生徒を求め、そこからIDを取り出して$keyword_idにまとめる
+        //後ほどこの$keyword_idを使い、guidance_reportsテーブルから生徒IDで該当する指導報告書を取得する
+
+        //検索欄に入力されたキーワードから、生徒を検索
         $students = Student::searchKeyword($request->keyword)->get();
-        $keyword = array();
+        //配列を用意し、入力されたキーワードに対応する生徒のIDを入れていく
+        $keyword_id = array();
         foreach ($students as $student) {
-            array_push($keyword, $student->id);
-        }
-        // dd(GuidanceReport::where('teacher_id', '=', $id)
-        //     ->where('student_id', '=', 2)->get());
-        $reports = GuidanceReport::where('teacher_id', '=', $id)
-            ->whereHas('student', function ($query) use ($keyword) {
-                foreach ($keyword as $word) {
-                    echo ('[' . $word . ']<br>');
-                    $query->where('student_id', '=', $word);
-                }
-
-                // for ($i = 0; $i < 2; $i++) {
-                //     $query->where('student_id', $i);
-                // }
-
-                // $query->where('student_id', 1);
-                // $query->where('student_id', 2);
-            })->get();
-        dd($reports);
-
-        foreach ($reports as $report) {
-            echo ('レポート:' . $report->id . '<br>');
+            array_push($keyword_id, $student->id);
         }
 
-        $reports = GuidanceReport::where('teacher_id', '=', $id)
-            ->searchKeyword($keyword)
-            ->searchDate($request->date)
+        //作成した$keyword_idを引数として、searchKeywordIdメソッドを使用
+        $reports = GuidanceReport::where('teacher_id', '=', $id) //ログインしてる講師に対応する条件
+            ->searchKeywordId($keyword_id) //検索した生徒に対応するという条件。Models/GuidanceReportのsearchKeywordIdメソッドを使用
+            ->searchDate($request->date) //検索して日付に対応するという条件。Models/GuidanceReportのsearchDateメソッドを使用
             ->with('student', 'timetable', 'subject', 'questionnaire')
             ->paginate($request->pagination ?? 2);
+
+        //↓whereHasを使うなら、以下でできそう
+
+        // $reports = GuidanceReport::where('teacher_id', '=', $id)
+        //     ->whereHas('student', function ($query) use ($keyword_id) {
+        //         foreach ($keyword_id as $word) {
+        //             $query->where('student_id', '=', $word);
+        //         }
+        //     })
+        //     ->searchDate($request->date) //検索して日付に対応するという条件。Models/GuidanceReportのsearchDateメソッドを使用
+        //     ->with('student', 'timetable', 'subject', 'questionnaire')
+        //     ->paginate($request->pagination ?? 2);
 
         return view('teacher.reports.index', compact('reports'));
     }
