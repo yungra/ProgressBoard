@@ -17,7 +17,8 @@
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                                 <form method="post"
-                                    action="{{ route('teacher.myinfo.update', ['id' => $teacher->id]) }}" enctype="multipart/form-data">
+                                    action="{{ route('teacher.myinfo.update', ['id' => $teacher->id]) }}"
+                                    enctype="multipart/form-data">
                                     {{-- @method('PUT')   --}}
                                     @csrf
                                     <div class="-m-2">
@@ -36,7 +37,7 @@
                                                 <label for="name" required
                                                     class="leading-7 text-sm text-gray-600">名前</label>
                                                 <input type="text" id="name" name="name"
-                                                    value="{{ $teacher->name }}"
+                                                    value="{{ old('name', $teacher->name) }}"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
@@ -45,7 +46,7 @@
                                                 <label for="email" required
                                                     class="leading-7 text-sm text-gray-600">メールアドレス</label>
                                                 <input type="email" id="email" name="email"
-                                                    value="{{ $teacher->email }}"
+                                                    value="{{ old('email', $teacher->email) }}"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
@@ -58,7 +59,7 @@
                                                     @foreach ($prefectures as $prefecture)
                                                         <optgroup label="{{ $prefecture->name }}">
                                                             @foreach ($prefecture->cities as $city)
-                                                                @if ($city->id === $teacher->city_id)
+                                                                @if ($city->id === (int) old('address', $teacher->city_id))
                                                                     <option value="{{ $city->id }}" selected>
                                                                         {{ $prefecture->name }}{{ $city->name }}
                                                                     </option>
@@ -80,7 +81,7 @@
                                                 <select name="university" id="university"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                     @foreach ($universities as $university)
-                                                        @if ($university->id === $teacher->university_id)
+                                                        @if ($university->id === (int) old('university', $teacher->university_id))
                                                             <option value="{{ $university->id }}" selected>
                                                                 {{ $university->name }}
                                                             </option>

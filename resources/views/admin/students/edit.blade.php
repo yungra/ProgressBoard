@@ -26,7 +26,7 @@
                                                 <label for="name" required
                                                     class="leading-7 text-sm text-gray-600">名前</label>
                                                 <input type="text" id="name" name="name"
-                                                    value="{{ $student->name }}"
+                                                    value="{{ old('name', $student->name) }}"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
@@ -35,7 +35,7 @@
                                                 <label for="email" required
                                                     class="leading-7 text-sm text-gray-600">メールアドレス</label>
                                                 <input type="email" id="email" name="email"
-                                                    value="{{ $student->email }}"
+                                                    value="{{ old('email', $student->email) }}"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
@@ -48,7 +48,7 @@
                                                     @foreach ($prefectures as $prefecture)
                                                         <optgroup label="{{ $prefecture->name }}">
                                                             @foreach ($prefecture->cities as $city)
-                                                                @if ($city->id === $student->city_id)
+                                                                @if ($city->id === (int) old('address', $student->city_id))
                                                                     <option value="{{ $city->id }}" selected>
                                                                         {{ $prefecture->name }}{{ $city->name }}
                                                                     </option>
@@ -70,7 +70,7 @@
                                                 <select name="school" id="school"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                     @foreach ($schools as $school)
-                                                        @if ($school->id === $student->school_id)
+                                                        @if ($school->id === (int) old('school', $student->school_id))
                                                             <option value="{{ $school->id }}" selected>
                                                                 {{ $school->name }}
                                                             </option>
@@ -91,15 +91,15 @@
                                                 <select name="desired_school" id="desired_school"
                                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                     @foreach ($schools as $desired_school)
-                                                        @if ($desired_school->id === $student->desired_school_id)
+                                                        @if ($desired_school->id === (int) old('desired_school', $student->desired_school_id))
                                                             <option value="{{ $desired_school->id }}" selected>
                                                                 {{ $desired_school->name }}
                                                             </option>
-                                                            @else
+                                                        @else
                                                             <option value="{{ $desired_school->id }}">
-                                                              {{ $desired_school->name }}
+                                                                {{ $desired_school->name }}
                                                             </option>
-                                                            @endif
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
