@@ -10,19 +10,19 @@ use App\Models\Teacher;
 use App\Models\Message;
 
 class ChatController extends Controller
-{    
+{
 
     public function show($id)
     {
         $chat_room = ChatRoom::where('teacher_id', '=', $id)
-        ->where('student_id', '=', Auth::id())
-        ->with('messages')
-        ->first();
+            ->where('student_id', '=', Auth::id())
+            ->with('messages', 'student', 'teacher')
+            ->first();
 
         // チャットルームが既に存在してるか判定
-        if($chat_room){
+        if ($chat_room) {
             // dd($chat_room->messages);
-        }else{
+        } else {
             $chat_room = ChatRoom::create([
                 'teacher_id' => $id,
                 'student_id' => Auth::id(),
@@ -32,23 +32,23 @@ class ChatController extends Controller
 
         $teacher = Teacher::where('id', '=', $id)->first();
         $messages = Message::get();
-        return view('student.chats.show', compact('teacher', 'chat_room'));
+        return view('student.chats.show', compact('chat_room'));
     }
 
     public function send(Request $request, $id)
     {
         $chat_room = ChatRoom::where('teacher_id', '=', $id)
-        ->where('student_id', '=', Auth::id())->first();
+            ->where('student_id', '=', Auth::id())->first();
         $chat_room_id = $chat_room->id;
 
         $content = $request->message;
-        
+
         Message::create([
             'chat_room_id' => $chat_room_id,
             'is_student' => 1,
             'content' => $content,
         ]);
-        return redirect()->route('student.chat.show',$id);
+        return redirect()->route('student.chat.show', $id);
     }
 
     /**

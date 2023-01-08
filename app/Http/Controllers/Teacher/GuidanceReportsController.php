@@ -81,11 +81,13 @@ class GuidanceReportsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
-        //     'password' => ['required', 'confirmed', 'min:8'],
-        // ]);
+        $request->validate([
+            'class_day' => ['required', 'string', 'max:255'],
+            // 'report' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:' . Teacher::class],
+            // 'password' => ['required', 'confirmed', 'min:8'],
+        ]);
 
         GuidanceReport::create([
             'student_id' => $request->student_id,
@@ -138,7 +140,7 @@ class GuidanceReportsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'report' => ['required', 'string'],
+            // 'report' => ['required', 'string', 'min:255'],
         ]);
 
         try {

@@ -34,7 +34,7 @@
                                                         <select name="student" id="student"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                             @foreach ($students as $student)
-                                                                @if ($student->id === $report->student->id)
+                                                                @if ($student->id === (int) old('student', $report->student->id))
                                                                     <option value="{{ $student->id }}" selected>
                                                                         {{ $student->name }}
                                                                     </option>
@@ -54,7 +54,7 @@
                                                             class="leading-7 text-sm text-gray-600">授業日</label>
 
                                                         <input type="date" id="class_day" name="class_day"
-                                                            value="{{ $report->class_day }}"
+                                                            value="{{ old('class_day', $report->class_day) }}"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                     </div>
                                                 </div>
@@ -66,13 +66,13 @@
                                                         <select name="timetable" id="timetable"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                             @foreach ($timetables as $timetable)
-                                                                @if ($timetable->id === $report->timetable->id)
+                                                                @if ($timetable->id === (int) old('timetable', $report->timetable->id))
                                                                     <option value="{{ $timetable->id }}" selected>
-                                                                        {{ $timetable->name }}
+                                                                        {{ $timetable->day }}曜{{ $timetable->name }}
                                                                     </option>
                                                                 @else
                                                                     <option value="{{ $timetable->id }}">
-                                                                        {{ $timetable->name }}
+                                                                        {{ $timetable->day }}曜{{ $timetable->name }}
                                                                     </option>
                                                                 @endif
                                                             @endforeach
@@ -87,7 +87,7 @@
                                                         <select name="subject" id="subject"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                             @foreach ($subjects as $subject)
-                                                                @if ($subject->id === $report->subject->id)
+                                                                @if ($subject->id === (int) old('subject', $report->subject->id))
                                                                     <option value="{{ $subject->id }}" selected>
                                                                         {{ $subject->name }}
                                                                     </option>
@@ -108,7 +108,7 @@
                                                         <select name="teacher" id="teacher"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                             @foreach ($teachers as $teacher)
-                                                                @if ($teacher->id === $report->teacher->id)
+                                                                @if ($teacher->id === (int) old('teacher', $report->teacher->id))
                                                                     <option value="{{ $teacher->id }}" selected>
                                                                         {{ $teacher->name }}
                                                                     </option>
@@ -134,7 +134,7 @@
 
                                                         <textarea type="text" id="report" name="report" value="{{ $report->report }}"
                                                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                                        {{ $report->report }}
+                                                        {{ old('report', $report->report) }}
                                                         </textarea>
                                                     </div>
                                                 </div>

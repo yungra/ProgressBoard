@@ -30,7 +30,8 @@
                                                     <select name="student_id" id="student_name"
                                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                         @foreach ($students as $student)
-                                                            <option value="{{ $student->id }}">
+                                                            <option
+                                                                value="{{ $student->id }}"@if ($student->id === (int) old('student_id')) selected @endif>
                                                                 {{ $student->name }}
                                                             </option>
                                                         @endforeach
@@ -43,7 +44,8 @@
                                                     <label for="class_day"
                                                         class="leading-7 text-sm text-gray-600">授業日</label>
                                                     <br>
-                                                    <input type="date" name="class_day">
+                                                    <input type="date" name="class_day"
+                                                        value="{{ old('class_day') }}">
                                                 </div>
                                             </div>
 
@@ -55,7 +57,8 @@
                                                     <select name="timetable" id="timetable"
                                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                         @foreach ($timetables as $timetable)
-                                                            <option value="{{ $timetable->id }}">
+                                                            <option value="{{ $timetable->id }}"
+                                                                @if ($timetable->id === (int) old('timetable')) selected @endif>
                                                                 {{ $timetable->day }}曜{{ $timetable->name }}
                                                             </option>
                                                         @endforeach
@@ -70,7 +73,8 @@
                                                     <select name="subject" id="subject"
                                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                         @foreach ($subjects as $subject)
-                                                            <option value="{{ $subject->id }}">
+                                                            <option value="{{ $subject->id }}"
+                                                                @if ($subject->id === (int) old('subject')) selected @endif>
                                                                 {{ $subject->name }}
                                                             </option>
                                                         @endforeach
@@ -88,7 +92,7 @@
                                                     <label for="report"
                                                         class="leading-7 text-sm text-gray-600">内容</label>
                                                     <br>
-                                                    <textarea id="report" name="report" class="w-2/3"></textarea>
+                                                    <textarea id="report" name="report" class="w-2/3">{{ old('report') }}</textarea>
                                                 </div>
                                             </div>
 

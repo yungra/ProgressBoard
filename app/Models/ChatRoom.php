@@ -9,15 +9,18 @@ class ChatRoom extends Model
 {
     use HasFactory;
 
-    public function student(){
-        return $this->hasOne(Student::class, 'id');
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
     }
 
-    public function teacher(){
-        return $this->hasOne(Teacher::class);
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
 
