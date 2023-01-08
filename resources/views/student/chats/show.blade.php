@@ -28,7 +28,7 @@
                                 <span>{{ $chat_room->teacher->name }}</span>
                                 <p class="text-sm">{{ $item->created_at }}</p>
                             </div>
-                            <p class="text-2xl bg-red-200 w-full">{{ $item->content }}</p>
+                            <p class="text-2xl bg-gray-300 w-full">{{ $item->content }}</p>
                         </div>
                         <br>
                     @endif
