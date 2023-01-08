@@ -16,23 +16,25 @@ return new class extends Migration
         Schema::create('guidance_reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->date('class_day');//授業日
-            $table->foreignId('timetable_id')//コマ
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->foreignId('subject_id')//科目
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->foreignId('teacher_id')//担当講師
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->text('report');//本文
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('student_name');
+            $table->date('class_day'); //授業日
+            $table->foreignId('timetable_id') //コマ
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('subject_id') //科目
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('teacher_id') //担当講師
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('teacher_name');
+            $table->text('report')->nullable(); //本文
             $table->timestamps();
         });
     }

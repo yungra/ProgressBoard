@@ -36,7 +36,9 @@ class GuidanceReport extends Model
 
     protected $fillable = [
         'student_id',
+        'student_name',
         'teacher_id',
+        'teacher_name',
         'class_day',
         'timetable_id',
         'subject_id',
@@ -44,13 +46,49 @@ class GuidanceReport extends Model
         'created_at'
     ];
 
-    public function scopeSearchKeywordId($query, $keyword_id)
+    public function scopeSearchStudent($query, $student_name)
     {
-        if (!is_null($keyword_id)) {
+        if (!is_null($student_name)) {
+            //全角スペースを半角に
+            $spaceConvert = mb_convert_kana($student_name, 's');
 
-            //コントローラから渡されたIDに対応するカラムを検索
-            foreach ($keyword_id as $id) {
-                $query->where('guidance_reports.student_id', $id);
+            //空白で区切る
+            //preg_split(検索するパターン,入力文字列,文字列を返す制限,フラグ)
+            //PREG_SPLIT_NO_EMPTY→空文字列でないものが返される
+            $keywords = preg_split('/[\s]+/', $spaceConvert, -1, PREG_SPLIT_NO_EMPTY);
+            //             「/（スラッシュ）」は、「正規表現」では、特に意味を持っていません。
+            // 「正規表現」のコード・パターンの前後において、明確化する「デリミタ」として使わている。
+            // 「デリミタ（Delimiter）」とは、「正規表現」のコード・パターンの前後を囲むことで、パターンの範囲を明示する役割をする記号のこと。
+
+            //単語をループで回す
+            foreach ($keywords as $word) {
+                $query->where('guidance_reports.student_name', 'like', '%' . $word . '%');
+            }
+
+            return $query;
+        } else {
+            return;
+        }
+    }
+
+    public function scopeSearchTeacher($query, $teacher_name)
+    {
+        if (!is_null($teacher_name)) {
+            //全角スペースを半角に
+            $spaceConvert = mb_convert_kana($teacher_name, 's');
+
+            //空白で区切る
+            //preg_split(検索するパターン,入力文字列,文字列を返す制限,フラグ)
+            //PREG_SPLIT_NO_EMPTY→空文字列でないものが返される
+            $keywords = preg_split('/[\s]+/', $spaceConvert, -1, PREG_SPLIT_NO_EMPTY);
+            //             「/（スラッシュ）」は、「正規表現」では、特に意味を持っていません。
+            // 「正規表現」のコード・パターンの前後において、明確化する「デリミタ」として使わている。
+            // 「デリミタ（Delimiter）」とは、「正規表現」のコード・パターンの前後を囲むことで、パターンの範囲を明示する役割をする記号のこと。
+
+            //単語をループで回す
+            foreach ($keywords as $word) {
+                echo ('[' . $word . ']');
+                $query->where('guidance_reports.teacher_name', 'like', '%' . $word . '%');
             }
 
             return $query;

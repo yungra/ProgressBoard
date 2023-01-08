@@ -27,10 +27,13 @@ class GuidanceReportsController extends Controller
     {
         $id = auth()->id();
         $reports = GuidanceReport::where('student_id', $id)
+            ->searchTeacher($request->keyword)
             ->searchDate($request->date)
             ->with('student', 'teacher', 'timetable', 'subject', 'questionnaire')
             ->paginate($request->pagination ?? 2);
-        // dd($reports[0]->questionnaire);
+
+        // dd($request->keyword, $reports);
+
         return view('student.reports.index', compact('reports'));
     }
 
