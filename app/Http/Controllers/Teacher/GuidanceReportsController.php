@@ -22,9 +22,12 @@ class GuidanceReportsController extends Controller
      */
     public function index(Request $request)
     {
+        //ログインしてる講師のIDを取得
         $id = Auth::id();
-        $reports = GuidanceReport::where('teacher_id', '=', $id)
-            ->searchDate($request->date)
+
+        $reports = GuidanceReport::where('teacher_id', '=', $id) //ログインしてる講師に対応する条件
+            ->searchStudent($request->keyword) //検索した生徒に対応するという条件。Models/GuidanceReportのsearchKeywordIdメソッドを使用
+            ->searchDate($request->date) //検索して日付に対応するという条件。Models/GuidanceReportのsearchDateメソッドを使用
             ->with('student', 'timetable', 'subject', 'questionnaire')
             ->paginate($request->pagination ?? 2);
 
@@ -60,13 +63,17 @@ class GuidanceReportsController extends Controller
             // 'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
+        $student_name = Student::where('id', $request->student_id)->first()->name;
+
         GuidanceReport::create([
             'student_id' => $request->student_id,
+            'student_name' => $student_name,
             'class_day' => $request->class_day,
             'timetable_id' => $request->timetable,
             'subject_id' => $request->subject,
             'report' => $request->report,
             'teacher_id' => Auth::id(),
+            'teacher_name' => Auth::user()->name,
         ]);
 
         return redirect()->route('teacher.reports.index');
