@@ -87,7 +87,6 @@ class GuidanceReport extends Model
 
             //単語をループで回す
             foreach ($keywords as $word) {
-                echo ('[' . $word . ']');
                 $query->where('guidance_reports.teacher_name', 'like', '%' . $word . '%');
             }
 
