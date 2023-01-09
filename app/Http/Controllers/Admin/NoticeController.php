@@ -9,6 +9,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use App\Jobs\SendNoticeMail;
 
 class NoticeController extends Controller
 {
@@ -43,24 +44,30 @@ class NoticeController extends Controller
     {
         $subject = $request->subject;
         $content = $request->content;
-        //生徒向けの場合
-        if ($request->is_student) {
-            $students_email = Student::where('deleted_at', null)->select('email')->get();
-            // foreach ($students_email as $smail) {
-            //     Mail::to($smail)
-            //         ->send(new TestMail($subject, $content));
-            // }
-            Mail::to($students_email[0])
-                ->send(new TestMail($subject, $content));
-        } else {
-            //講師向けの場合
-            $teachers_email = Teacher::where('deleted_at', null)->select('email')->get();
-            foreach ($teachers_email as $tmail) {
-                Mail::to($tmail)
-                    ->send(new TestMail($subject, $content));
-            }
-        }
-        dd('メール送信完了');
+        $is_student = $request->is_student;
+
+        // //同期
+        // //生徒向けの場合
+        // if ($request->is_student) {
+        //     $students_email = Student::where('deleted_at', null)->select('email')->get();
+        //     // foreach ($students_email as $smail) {
+        //     //     Mail::to($smail)
+        //     //         ->send(new TestMail($subject, $content));
+        //     // }
+        //     Mail::to($students_email[0])
+        //         ->send(new TestMail($subject, $content));
+        // } else {
+        //     //講師向けの場合
+        //     $teachers_email = Teacher::where('deleted_at', null)->select('email')->get();
+        //     foreach ($teachers_email as $tmail) {
+        //         Mail::to($tmail)
+        //             ->send(new TestMail($is_student, $subject, $content));
+        //     }
+        // }
+
+        //非同期に送信
+        SendNoticeMail::dispatch($is_student, $subject, $content);
+        // dd('メール送信完了');
 
         $request->validate([
             // 'class_day' => ['required', 'string', 'max:255'],
@@ -71,7 +78,7 @@ class NoticeController extends Controller
         ]);
 
         Notice::create([
-            'is_student' => $request->is_student,
+            'is_student' => $is_student,
             'subject' => $subject,
             'content' => $content,
         ]);

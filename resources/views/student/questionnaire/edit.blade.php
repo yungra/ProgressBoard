@@ -61,94 +61,100 @@
 
                                 {{-- 右カラム --}}
                                 <div class="w-2/3 mx-auto">
-                                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                                    <form method="post"
-                                        action="{{ route('student.questionnaire.update', ['id' => $questionnaire->id]) }}">
-                                        {{-- @method('PUT')   --}}
-                                        @csrf
-                                        <div class="-m-2">
 
-                                            {{-- hiddenで持っておく値 --}}
-                                            <input type="hidden" id="guidance_report_id" name="guidance_report_id"
-                                                value={{ $report->id }} />
+                                    <div class="flex">
+                                        {{-- 選択式アンケートカラム --}}
+                                        <div class="w-1/3">
+                                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                                            <form method="post"
+                                                action="{{ route('student.questionnaire.update', ['id' => $questionnaire->id]) }}">
+                                                {{-- @method('PUT')   --}}
+                                                @csrf
 
-                                            <div class="p-2 w-1/2 mx-auto">
-                                                <div class="relative">
-                                                    <label for="comprehension" required
-                                                        class="leading-7 text-sm text-gray-600">理解度</label><br>
-                                                    <select name="comprehension">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($questionnaire->comprehension === $i)
-                                                                <option selected>{{ $i }}</option>
-                                                            @else
-                                                                <option>{{ $i }}</option>
-                                                            @endif
-                                                        @endfor
-                                                    </select>
+                                                {{-- hiddenで持っておく値 --}}
+                                                <input type="hidden" id="guidance_report_id" name="guidance_report_id"
+                                                    value={{ $report->id }} />
+
+                                                <div class="p-2 w-1/2 mx-auto">
+                                                    <div class="relative">
+                                                        <label for="comprehension" required
+                                                            class="leading-7 text-sm text-gray-600">理解度</label><br>
+                                                        <select name="comprehension">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($questionnaire->comprehension === $i)
+                                                                    <option selected>{{ $i }}</option>
+                                                                @else
+                                                                    <option>{{ $i }}</option>
+                                                                @endif
+                                                            @endfor
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="p-2 w-1/2 mx-auto">
-                                                <div class="relative">
-                                                    <label for="speed" required
-                                                        class="leading-7 text-sm text-gray-600">授業スピード</label><br>
-                                                    <select name="speed">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($questionnaire->speed === $i)
-                                                                <option selected>{{ $i }}</option>
-                                                            @else
-                                                                <option>{{ $i }}</option>
-                                                            @endif
-                                                        @endfor
-                                                    </select>
+                                                <div class="p-2 w-1/2 mx-auto">
+                                                    <div class="relative">
+                                                        <label for="speed" required
+                                                            class="leading-7 text-sm text-gray-600">授業スピード</label><br>
+                                                        <select name="speed">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($questionnaire->speed === $i)
+                                                                    <option selected>{{ $i }}</option>
+                                                                @else
+                                                                    <option>{{ $i }}</option>
+                                                                @endif
+                                                            @endfor
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="p-2 w-1/2 mx-auto">
-                                                <div class="relative">
-                                                    <label for="satisfaction" required
-                                                        class="leading-7 text-sm text-gray-600">満足度</label><br>
-                                                    <select name="satisfaction">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($questionnaire->satisfaction === $i)
-                                                                <option selected>{{ $i }}</option>
-                                                            @else
-                                                                <option>{{ $i }}</option>
-                                                            @endif
-                                                        @endfor
-                                                    </select>
+                                                <div class="p-2 w-1/2 mx-auto">
+                                                    <div class="relative">
+                                                        <label for="satisfaction" required
+                                                            class="leading-7 text-sm text-gray-600">満足度</label><br>
+                                                        <select name="satisfaction">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($questionnaire->satisfaction === $i)
+                                                                    <option selected>{{ $i }}</option>
+                                                                @else
+                                                                    <option>{{ $i }}</option>
+                                                                @endif
+                                                            @endfor
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
+                                        </div>
+
+                                        {{-- 自由記述カラム --}}
+                                        <div class="w-2/3">
                                             <div class="p-2 w-full mx-auto">
                                                 <div class="relative">
                                                     <label for="free" required
                                                         class="leading-7 text-sm text-gray-600">自由記述</label>
-
                                                     <textarea type="text" id="free" name="free"
-                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                        {{ $questionnaire->free }}  
-                                        </textarea>
+                                                        class="h-96 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $questionnaire->free }}  </textarea>
                                                 </div>
                                             </div>
-
-
-                                            <div class="p-2 w-full flex justify-around mt-4">
-                                                <button type="button"
-                                                    onclick="location.href='{{ route('student.reports.index', ['id' => $report->id]) }}'"
-                                                    class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
-                                                @if ($flag === false)
-                                                    <button type="submit"
-                                                        class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">回答する</button>
-                                                @else
-                                                    <button type="submit"
-                                                        class="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">更新する</button>
-                                                @endif
-                                            </div>
                                         </div>
-                                    </form>
+
+                                    </div>
+
+
+                                    <div class="p-2 w-full flex justify-around mt-4">
+                                        <button type="button"
+                                            onclick="location.href='{{ route('student.reports.index', ['id' => $report->id]) }}'"
+                                            class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
+                                        @if ($flag === false)
+                                            <button type="submit"
+                                                class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">回答する</button>
+                                        @else
+                                            <button type="submit"
+                                                class="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">更新する</button>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
+                            </form>
 
                         </div>
                     </section>
