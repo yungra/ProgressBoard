@@ -32,7 +32,7 @@ use App\Http\Controllers\Student\TodoController;
 
 Route::get('/', function () {
     return view('student.welcome');
-});
+})->middleware('auth:students');
 
 Route::get('/dashboard', function () {
     return view('student.dashboard');

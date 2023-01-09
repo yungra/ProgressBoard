@@ -32,7 +32,7 @@ use App\Http\Controllers\Teacher\QuestionnaireController;
 
 Route::get('/', function () {
     return view('teacher.welcome');
-});
+})->middleware('auth:teachers');
 
 Route::get('/dashboard', function () {
     return view('teacher.dashboard');
