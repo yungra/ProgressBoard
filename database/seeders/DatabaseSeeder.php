@@ -31,10 +31,11 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
             StudentSeeder::class, // 開発用
             TeacherSeeder::class, // 開発用
-            GuidanceReportSeeder::class,// 開発用
-            ChatRoomSeeder::class,// 開発用
-            MessageSeeder::class,// 開発用
-            QuestionnaireSeeder::class,// 開発用
+            GuidanceReportSeeder::class, // 開発用
+            ChatRoomSeeder::class, // 開発用
+            MessageSeeder::class, // 開発用
+            QuestionnaireSeeder::class, // 開発用
+            NoticeSeeder::class, // 開発用
         ]);
     }
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\Teacher\MyinfoController;
 use App\Http\Controllers\Teacher\GuidanceReportsController;
 use App\Http\Controllers\Teacher\ChatController;
 use App\Http\Controllers\Teacher\QuestionnaireController;
+use App\Http\Controllers\Teacher\NoticeController;
 
 
 /*
@@ -69,6 +70,13 @@ Route::prefix('myinfo')
         Route::get('show/{id}', [MyinfoController::class, 'show'])->name('myinfo.show');
         Route::get('edit/{id}', [MyinfoController::class, 'edit'])->name('myinfo.edit');
         Route::post('update/{id}', [MyinfoController::class, 'update'])->name('myinfo.update');
+    });
+
+Route::prefix('notice')
+    ->middleware('auth:teachers')
+    ->group(function () {
+        Route::get('index', [NoticeController::class, 'index'])->name('notice.index');
+        Route::get('show/{id}', [NoticeController::class, 'show'])->name('notice.show');
     });
 
 Route::middleware('auth:teachers')->group(function () {

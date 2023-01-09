@@ -92,7 +92,7 @@
                                                     <label for="report"
                                                         class="leading-7 text-sm text-gray-600">内容</label>
                                                     <br>
-                                                    <textarea id="report" name="report" class="w-2/3">{{ old('report') }}</textarea>
+                                                    <textarea id="report" name="report" style="white-space: pre-wrap;" class="w-2/3 h-96">{{ old('report') }}</textarea>
                                                 </div>
                                             </div>
 

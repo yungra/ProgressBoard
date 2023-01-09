@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\TeachersController;
+use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\TestController;
 
 
@@ -37,6 +38,7 @@ Route::get('/', function () {
 Route::resource('students', StudentsController::class)
     ->middleware('auth:admin')->except(['show']);
 
+//prefix→URLの接頭辞を設定（prefix('sample)→/sample/○○みたいに）
 Route::prefix('expired-students')->middleware('auth:admin')->group(function () {
     Route::get('index', [StudentsController::class, 'expiredStudentIndex'])->name('expired-students.index');
     Route::post('destroy/{student}', [StudentsController::class, 'expiredStudentDestroy'])->name('expired-students.destroy');
@@ -49,6 +51,9 @@ Route::prefix('expired-teachers')->middleware('auth:admin')->group(function () {
     Route::get('index', [TeachersController::class, 'expiredTeacherIndex'])->name('expired-teachers.index');
     Route::post('destroy/{teacher}', [TeachersController::class, 'expiredTeacherDestroy'])->name('expired-teachers.destroy');
 });
+
+Route::resource('notice', NoticeController::class)
+    ->middleware('auth:admin');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

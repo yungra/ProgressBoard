@@ -17,6 +17,7 @@ use App\Http\Controllers\Student\ChatController;
 use App\Http\Controllers\Student\MyinfoController;
 use App\Http\Controllers\Student\QuestionnaireController;
 use App\Http\Controllers\Student\TodoController;
+use App\Http\Controllers\Student\NoticeController;
 
 
 /*
@@ -73,6 +74,13 @@ Route::prefix('todo')
     ->middleware('auth:students')
     ->group(function () {
         Route::get('show', [TodoController::class, 'show'])->name('todo.show');
+    });
+
+Route::prefix('notice')
+    ->middleware('auth:students')
+    ->group(function () {
+        Route::get('index', [NoticeController::class, 'index'])->name('notice.index');
+        Route::get('show/{id}', [NoticeController::class, 'show'])->name('notice.show');
     });
 
 Route::middleware('auth:students')->group(function () {
