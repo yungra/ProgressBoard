@@ -24,7 +24,7 @@
                         指導報告書一覧
                     </x-nav-link>
                     <x-nav-link :href="route('student.todo.show')" :active="request()->routeIs('student.todo.show')">
-                        todo機能
+                        宿題機能
                     </x-nav-link>
                     <x-nav-link :href="route('student.notice.index')" :active="request()->routeIs('student.notice.index')">
                         お知らせ

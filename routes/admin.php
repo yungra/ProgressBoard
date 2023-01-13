@@ -32,7 +32,7 @@ use App\Http\Controllers\TestController;
 Route::get('/test', TestController::class, 'index');
 
 Route::get('/', function () {
-    return view('admin.welcome');
+    return view('admin.dashboard');
 })->middleware('auth:admin');
 
 Route::resource('students', StudentsController::class)

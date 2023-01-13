@@ -20,9 +20,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    // public const HOME = '/dashboard';
+    public const STUDENT_HOME = '/myinfo/show';
     public const ADMIN_HOME = '/admin/dashboard';
-    public const STUDENT_HOME = '/student/myinfo/show';
     public const TEACHER_HOME = '/teacher/dashboard';
 
     /**
@@ -39,27 +39,25 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
-
+            //生徒用
             //prefix→urlの接頭辞をグループ化して設定
+            Route::middleware('web')
+                ->as('student.')
+                ->group(base_path('routes/student.php'));
+
+            //管理者用
             Route::prefix('admin')
-            ->as('admin.')
-            ->middleware('web')
-            // ->namespace($this->namespace)
-            ->group(base_path('routes/admin.php'));
+                ->as('admin.')
+                ->middleware('web')
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
 
-            Route::prefix('student')
-            ->as('student.')
-            ->middleware('web')
-            // ->namespace($this->namespace)
-            ->group(base_path('routes/student.php'));
-
+            //講師用
             Route::prefix('teacher')
-            ->as('teacher.')
-            ->middleware('web')
-            // ->namespace($this->namespace)
-            ->group(base_path('routes/teacher.php'));
+                ->as('teacher.')
+                ->middleware('web')
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/teacher.php'));
         });
     }
 
