@@ -32,7 +32,7 @@ use App\Http\Controllers\Teacher\NoticeController;
 */
 
 Route::get('/', function () {
-    return view('teacher.welcome');
+    return view('teacher.dashboard');
 })->middleware('auth:teachers');
 
 Route::get('/dashboard', function () {

@@ -31,8 +31,12 @@ use App\Http\Controllers\Student\NoticeController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('student.welcome');
+// });
+
 Route::get('/', function () {
-    return view('student.welcome');
+    return redirect()->route('student.myinfo.show');
 })->middleware('auth:students');
 
 Route::get('/dashboard', function () {
