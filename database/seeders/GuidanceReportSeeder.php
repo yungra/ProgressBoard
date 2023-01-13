@@ -69,7 +69,7 @@ class GuidanceReportSeeder extends Seeder
             [
                 'student_id' => '2',
                 'student_name' => 'student2',
-                'teacher_id' => '3',
+                'teacher_id' => '1',
                 'teacher_name' => 'teacher3',
                 'timetable_id' => '4',
                 'subject_id' => '7', //歴史

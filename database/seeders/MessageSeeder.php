@@ -22,9 +22,39 @@ class MessageSeeder extends Seeder
                 'content' => 'aaaaaaaaaa',
             ],
             [
+                'chat_room_id' => '1',
+                'is_student' => '0',
+                'content' => 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+            ],
+            [
+                'chat_room_id' => '1',
+                'is_student' => '1',
+                'content' => 'aaaaaaaaaa',
+            ],
+            [
+                'chat_room_id' => '1',
+                'is_student' => '0',
+                'content' => 'aaaaaaaaaa',
+            ],
+            [
+                'chat_room_id' => '2',
+                'is_student' => '1',
+                'content' => 'aaaaaaaaaa',
+            ],
+            [
                 'chat_room_id' => '2',
                 'is_student' => '0',
-                'content' => 'bbbbbbbb',
+                'content' => 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+            ],
+            [
+                'chat_room_id' => '2',
+                'is_student' => '1',
+                'content' => 'aaaaaaaaaa',
+            ],
+            [
+                'chat_room_id' => '2',
+                'is_student' => '0',
+                'content' => 'aaaaaaaaaa',
             ],
         ]);
     }

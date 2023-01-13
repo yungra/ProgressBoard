@@ -27,6 +27,7 @@ class StudentsController extends Controller
         //
         $students = Student::with('address.prefecture', 'school', 'desired_school', 'guidance_reports')
             ->searchKeyword($request->keyword)
+            ->orderBy('id', 'asc')
             ->get();
         // dd($students);
         $teacher_id = Auth::id();
