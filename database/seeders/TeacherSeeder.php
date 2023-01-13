@@ -18,52 +18,58 @@ class TeacherSeeder extends Seeder
     {
         DB::table('teachers')->insert([
             [
-            'name' => 'teacher1',
-            'email' => 'teacher1@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '38', //京都府右京区
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師1.png',
+                'name' => 'teacher1',
+                'email' => 'teacher1@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '38', //京都府右京区
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'teacher2',
-            'email' => 'teacher2@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '1909', //鹿児島県中種子町
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師2.png',
+                'name' => 'teacher2',
+                'email' => 'teacher2@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '1909', //鹿児島県中種子町
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'teacher3',
-            'email' => 'teacher3@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '38', //京都府右京区
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師3.png',
+                'name' => 'teacher3',
+                'email' => 'teacher3@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '250',
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'teacher4',
-            'email' => 'teacher4@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '38', //京都府右京区
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師4.png',
+                'name' => 'teacher4',
+                'email' => 'teacher4@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '350',
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'teacher5',
-            'email' => 'teacher5@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '38', //京都府右京区
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師5.png',
+                'name' => 'teacher5',
+                'email' => 'teacher5@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '450',
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
             [
-            'name' => 'teacher6',
-            'email' => 'teacher6@test.com',
-            'password' => Hash::make('password123'),
-            'city_id' => '38', //京都府右京区
-            'university_id' => '2',
-            'created_at' => '2022/10/10 10:10:10'
+                'img_path' => 'public/講師6.png',
+                'name' => 'teacher6',
+                'email' => 'teacher6@test.com',
+                'password' => Hash::make('password123'),
+                'city_id' => '550',
+                'university_id' => '2',
+                'created_at' => '2022/10/10 10:10:10'
             ],
         ]);
     }
