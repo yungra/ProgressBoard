@@ -10,10 +10,10 @@ function App() {
 
     return (
       <>
-          <Router>
-      <ChakraProvider>
-        <Todo />
-      </ChakraProvider>
+      <Router>
+        <ChakraProvider>
+          <Todo />
+        </ChakraProvider>
       </Router>
     </>
     );
