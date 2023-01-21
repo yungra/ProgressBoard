@@ -56,6 +56,7 @@ const Todo = () => {
                 </Heading>
                 <List
                     todos={todos}
+                    setTodos={setTodos}
                     deleteTodo={deleteTodo}
                     updateTodo={updateTodo}
                 />
