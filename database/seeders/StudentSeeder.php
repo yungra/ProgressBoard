@@ -18,7 +18,7 @@ class StudentSeeder extends Seeder
     {
         DB::table('students')->insert([
             [
-                'img_path' => 'public/生徒1.png',
+                'img_path' => 'public/student1.png',
                 'name' => 'student1',
                 'email' => 'student1@test.com',
                 'password' => Hash::make('password123'),
@@ -28,7 +28,7 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'img_path' => 'public/生徒2.png',
+                'img_path' => 'public/student2.png',
                 'name' => 'student2',
                 'email' => 'student2@test.com',
                 'password' => Hash::make('password123'),
@@ -38,7 +38,7 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'img_path' => 'public/生徒3.png',
+                'img_path' => 'public/student3.png',
                 'name' => 'student3',
                 'email' => 'student3@test.com',
                 'password' => Hash::make('password123'),
@@ -48,7 +48,7 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'img_path' => 'public/生徒4.png',
+                'img_path' => 'public/student4.png',
                 'name' => 'student4',
                 'email' => 'student4@test.com',
                 'password' => Hash::make('password123'),
@@ -58,7 +58,7 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'img_path' => 'public/生徒5.png',
+                'img_path' => 'public/student5.png',
                 'name' => 'student5',
                 'email' => 'student5@test.com',
                 'password' => Hash::make('password123'),
@@ -68,7 +68,7 @@ class StudentSeeder extends Seeder
                 'created_at' => '2022/10/10 10:10:10'
             ],
             [
-                'img_path' => 'public/生徒6.png',
+                'img_path' => 'public/student6.png',
                 'name' => 'student6',
                 'email' => 'student6@test.com',
                 'password' => Hash::make('password123'),
