@@ -7,7 +7,7 @@
 
 
 ## URL
-progressboard.net
+https://www.progressboard.net/
 
 ## 使用技術
 - PHP 8.1.13  
