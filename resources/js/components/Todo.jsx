@@ -69,7 +69,7 @@ const Todo = () => {
                     bgColor="white"
                     variant="outline"
                     px={7}
-                    ml={10}
+                    ml="12%"
                     onClick={() => navigate(-1)}
                 >
                     戻る
