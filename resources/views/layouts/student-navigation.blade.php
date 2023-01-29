@@ -89,8 +89,20 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('student.dashboard')" :active="request()->routeIs('student.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('student.myinfo.show')" :active="request()->routeIs('student.myinfo.show')">
+                登録情報
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student.teachers.index')" :active="request()->routeIs('student.teachers.index')">
+                講師一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student.reports.index')" :active="request()->routeIs('student.reports.index')">
+                指導報告書一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student.todo.show')" :active="request()->routeIs('student.todo.show')">
+                宿題機能
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student.notice.index')" :active="request()->routeIs('student.notice.index')">
+                お知らせ
             </x-responsive-nav-link>
         </div>
 
