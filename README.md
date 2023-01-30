@@ -36,6 +36,7 @@ Laravel Sailを使うことによる、環境構築の容易性。
 - React Icons 4.7.1  
 - tailwindcss 3.2.4  
 - AWS(Lightsail)
+GCPと並び、デプロイのデファクトスタンダードだから。
 
 ## 機能一覧
 - ログイン機能  
