@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { HStack, IconButton, Text } from "@chakra-ui/react";
+import { HStack, IconButton, Text, useToast } from "@chakra-ui/react";
 // POINT react-iconsからアイコンをインポート
 import { VscCheck } from "react-icons/vsc";
 import { Draggable } from "react-beautiful-dnd";
 
 const Item = ({ index, todo, complete, updateTodo }) => {
+    const toast = useToast();
     const [editingContent, setEditingContent] = useState(todo.content);
 
     const changeContent = (e) => setEditingContent(e.target.value);
@@ -37,7 +38,16 @@ const Item = ({ index, todo, complete, updateTodo }) => {
                 >
                     <HStack key={todo.id} spacing="5">
                         <IconButton
-                            onClick={() => complete(todo.id)}
+                            onClick={() => {
+                                complete(todo.id);
+                                toast({
+                                    title: "タスクを削除しました！",
+                                    description: todo.content,
+                                    status: "success",
+                                    duration: 3000,
+                                    isClosable: true,
+                                });
+                            }}
                             icon={<VscCheck />}
                             isRound
                             bgColor="cyan.100"
