@@ -9,6 +9,19 @@
 ## URL
 https://www.progressboard.net/
 
+## ログイン情報
+### 生徒ログイン  
+Email:student1@test.com  
+Password:password123  
+
+### 講師ログイン
+Email:teacher1@test.com  
+Password:password123  
+
+管理者ログイン:  
+Email:admin@test.com  
+Password:password123  
+
 ## 使用技術
 - PHP 8.1.13  
 - Laravel 9.40.1  
