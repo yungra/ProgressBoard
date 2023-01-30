@@ -25,14 +25,17 @@ Password:password123
 ## 使用技術
 - PHP 8.1.13  
 - Laravel 9.40.1  
+Laravel Sailを使うことによる、環境構築の容易性。  
 - Composer 2.5.1  
 - Vite 4.0.4  
 - npm 9.2.0  
 - Node.js 18.12.1  
 - React 18.2.0  
+最も流行っているフロントエンドフレームワークであり、Vue.jsよりもできる幅が広く、その分難しいと聞き、これを習得することによってよりフロントエンドの力がつくと思ったから
 - Chakura UI 2.4.9  
 - React Icons 4.7.1  
 - tailwindcss 3.2.4  
+- AWS(Lightsail)
 
 ## 機能一覧
 - ログイン機能  
