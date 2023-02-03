@@ -120,7 +120,7 @@
                                                 <td class="md:px-4 py-3">{{ $teacher->created_at }}</td>
                                                 <td class="px-4 text-center">
                                                     <button
-                                                        onclick="location.href='{{ route('teacher.chat.show', $teacher->id) }}'"
+                                                        onclick="location.href='{{ route('student.chat.show', $teacher->id) }}'"
                                                         class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
                                                 </td>
                                             </tr>
