@@ -27,7 +27,6 @@ class QuestionnaireController extends Controller
             ->first();
         // 空なら
         if (empty($questionnaire)) {
-            // dd('空だよ');
             $questionnaire = new Questionnaire();
             $questionnaire->fill([
                 'guidance_report_id' => $report_id,
@@ -37,7 +36,6 @@ class QuestionnaireController extends Controller
             ]);
             // データベースに値をinsert
             $questionnaire->save();
-            // dd($questionnaire);
             return view('student.questionnaire.edit', compact('report', 'questionnaire', 'flag'));
         } else {
             $flag = true;

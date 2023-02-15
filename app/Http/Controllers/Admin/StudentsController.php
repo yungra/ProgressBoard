@@ -20,15 +20,13 @@ class StudentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-        
     }
 
     public function index(Request $request)
     {
         $students = Student::with('address.prefecture', 'school', 'desired_school')
-        ->searchKeyword($request->keyword)
-        ->paginate($request->pagination ?? 2);
-        // dd($students);
+            ->searchKeyword($request->keyword)
+            ->paginate($request->pagination ?? 2);
         return view('admin.students.index', compact('students'));
     }
 
@@ -54,10 +52,9 @@ class StudentsController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . Student::class],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
-        // dd($request);
         Student::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -90,7 +87,6 @@ class StudentsController extends Controller
     public function edit($id)
     {
         $student = Student::findOrFail($id);
-        // dd($student);
         $prefectures = Prefecture::with('cities')->orderBy('id', 'asc')->get();
         $schools = School::orderBy('id', 'asc')->get();
         return view('admin.students.edit', compact('student', 'prefectures', 'schools'));
@@ -107,7 +103,7 @@ class StudentsController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . Student::class],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
         $student = Student::findOrFail($id);
@@ -134,15 +130,17 @@ class StudentsController extends Controller
         return redirect()->route('admin.students.index');
     }
 
-    public function expiredStudentIndex(Request $request){
+    public function expiredStudentIndex(Request $request)
+    {
         $expiredStudents = Student::onlyTrashed()
-        ->searchKeyword($request->keyword)
-        ->paginate($request->pagination ?? 2);
+            ->searchKeyword($request->keyword)
+            ->paginate($request->pagination ?? 2);
         return view('admin.students.expired-students', compact('expiredStudents'));
     }
-    
-    public function expiredStudentDestroy($id){
+
+    public function expiredStudentDestroy($id)
+    {
         Student::onlyTrashed()->findOrFail($id)->forceDelete();
-        return redirect()->route('admin.expired-students.index'); 
+        return redirect()->route('admin.expired-students.index');
     }
 }

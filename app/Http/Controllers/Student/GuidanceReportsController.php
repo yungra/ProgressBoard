@@ -32,15 +32,12 @@ class GuidanceReportsController extends Controller
             ->with('student', 'teacher', 'timetable', 'subject', 'questionnaire')
             ->paginate($request->pagination ?? 2);
 
-        // dd($request->keyword, $reports);
-
         return view('student.reports.index', compact('reports'));
     }
 
     public function show($id)
     {
         $report = GuidanceReport::with('teacher', 'timetable', 'subject')->findOrFail($id);
-        // dd($report);
         return view('student.reports.show', compact('report'));
     }
 }
