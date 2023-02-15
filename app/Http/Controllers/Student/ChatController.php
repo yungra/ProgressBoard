@@ -21,7 +21,7 @@ class ChatController extends Controller
 
         // チャットルームが既に存在してるか判定
         if ($chat_room) {
-            // dd($chat_room->messages);
+            // 存在する場合はスルー;
         } else {
             $chat_room = ChatRoom::create([
                 'teacher_id' => $id,
@@ -37,6 +37,11 @@ class ChatController extends Controller
 
     public function send(Request $request, $id)
     {
+
+        $request->validate([
+            'message' => 'required'
+        ]);
+
         $chat_room = ChatRoom::where('teacher_id', '=', $id)
             ->where('student_id', '=', Auth::id())->first();
         $chat_room_id = $chat_room->id;

@@ -29,7 +29,6 @@ class StudentsController extends Controller
             ->searchKeyword($request->keyword)
             ->orderBy('id', 'asc')
             ->get();
-        // dd($students);
         $teacher_id = Auth::id();
         $target = array();
         $nontarget = array();

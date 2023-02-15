@@ -19,7 +19,6 @@ class MyinfoController extends Controller
     {
         $id = Auth::id();
         $myinfo = Teacher::where('id', '=', $id)->with('address.prefecture', 'university')->first();
-        // dd($myinfo->address->prefecture);
         return view('teacher.myinfo.show', compact('myinfo'));
     }
 

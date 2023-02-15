@@ -31,9 +31,12 @@ use App\Http\Controllers\Teacher\NoticeController;
 |
 */
 
-Route::get('/', function () {
-    return view('teacher.dashboard');
-})->middleware('auth:teachers');
+// Route::get('/', function () {
+//     return view('teacher.dashboard');
+// })->middleware('auth:teachers');
+
+Route::get('/', [StudentsController::class, 'index'])
+    ->middleware('auth:teachers')->name('home');
 
 Route::get('/dashboard', function () {
     return view('teacher.dashboard');
