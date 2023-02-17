@@ -31,9 +31,8 @@ use App\Http\Controllers\TestController;
 
 Route::get('/test', TestController::class, 'index');
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-})->middleware('auth:admin');
+Route::get('/', [StudentsController::class, 'index'])
+    ->middleware('auth:admin')->name('home');
 
 Route::resource('students', StudentsController::class)
     ->middleware('auth:admin')->except(['show']);
