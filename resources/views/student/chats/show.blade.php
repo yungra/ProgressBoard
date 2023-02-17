@@ -39,7 +39,8 @@
             </div>
 
             {{-- メッセージ入力欄 --}}
-            <form action="{{ route('student.chat.send', $chat_room->teacher->id) }}" method="post">
+            <form action="{{ route('student.chat.send', $chat_room->teacher->id) }}" method="post"
+                onsubmit="return false;">
                 @csrf
                 <div class="flex justify-center p-2 w-full">
                     <div class="relative w-3/4">
@@ -50,7 +51,8 @@
                 </div>
                 <div class="p-2 w-full">
                     <button
-                        class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">送信</button>
+                        class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                        type="submit">送信</button>
                 </div>
             </form>
 

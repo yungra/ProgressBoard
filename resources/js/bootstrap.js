@@ -39,16 +39,16 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 //import {モジュール名} from "インポート元"
 
 import Echo from "laravel-echo";
-// import Pusher from 'pusher-js';
+import Pusher from "pusher-js";
 
 //window→画面上に表示されているすべてのオブジェクトの親となるオブジェクトで、JavaScriptのオブジェクト階層の最上位に位置する
-// window.Pusher = Pusher;
+window.Pusher = Pusher;
 
-// window.Echo = new Echo({
-//     broadcaster: "pusher",
-//     key: import.meta.env.VITE_ABLY_PUBLIC_KEY,
-//     wsHost: "realtime-pusher.ably.io",
-//     wsPort: 443,
-//     disableStats: true,
-//     encrypted: true,
-// });
+window.Echo = new Echo({
+    broadcaster: "pusher",
+    key: import.meta.env.VITE_ABLY_PUBLIC_KEY,
+    wsHost: "realtime-pusher.ably.io",
+    wsPort: 443,
+    disableStats: true,
+    encrypted: true,
+});
