@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\TaskAdded;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
@@ -28,11 +27,6 @@ use App\Http\Controllers\TestController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get("/tasks",function() {
-    event(new TaskAdded);
-});
-
 
 Route::get('/test', TestController::class, 'index');
 

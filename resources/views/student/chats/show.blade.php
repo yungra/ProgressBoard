@@ -39,8 +39,7 @@
             </div>
 
             {{-- メッセージ入力欄 --}}
-            <form action="{{ route('student.chat.send', $chat_room->teacher->id) }}" method="post"
-                onsubmit="return false;">
+            <form action="{{ route('student.chat.send', $chat_room->teacher->id) }}" method="post">
                 @csrf
                 <div class="flex justify-center p-2 w-full">
                     <div class="relative w-3/4">
