@@ -30,7 +30,11 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get("/tasks",function() {
-    event(new TaskAdded);
+    $task = [
+        "id" => 1,
+        "title" => "タスク1",
+    ];
+    event(new TaskAdded($task));
 });
 
 
