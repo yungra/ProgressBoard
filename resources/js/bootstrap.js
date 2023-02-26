@@ -63,7 +63,7 @@ import Pusher from "pusher-js"; //追加
 
 window.Echo = new Echo({
     broadcaster: "pusher",
-    key: "0e96ccee8f00cfa2cfdf",
+    key: "7704a90aa1acf69d96d8",
     cluster: "ap3",
     forceTLS: true,
 });
