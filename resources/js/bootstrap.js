@@ -38,10 +38,10 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 //import→あるモジュールでエクスポートされた、関数やオブジェクト、プリミティブ値を別モジュール内にインポートするために使う文法
 //import {モジュール名} from "インポート元"
 
-import Echo from "laravel-echo";
-// import Pusher from 'pusher-js';
+// import Echo from "laravel-echo";
+// import Pusher from "pusher-js";
 
-//window→画面上に表示されているすべてのオブジェクトの親となるオブジェクトで、JavaScriptのオブジェクト階層の最上位に位置する
+// //window→画面上に表示されているすべてのオブジェクトの親となるオブジェクトで、JavaScriptのオブジェクト階層の最上位に位置する
 // window.Pusher = Pusher;
 
 // window.Echo = new Echo({
@@ -52,3 +52,25 @@ import Echo from "laravel-echo";
 //     disableStats: true,
 //     encrypted: true,
 // });
+
+// window.Echo.channel("chat-added-channel").listen("ChatAdded", function (data) {
+//     console.log("received a message");
+//     console.log(data);
+// });
+
+import Echo from "laravel-echo";
+import Pusher from "pusher-js"; //追加
+
+window.Echo = new Echo({
+    broadcaster: "pusher",
+    key: "7704a90aa1acf69d96d8",
+    cluster: "ap3",
+    forceTLS: true,
+});
+
+var channel = window.Echo.channel("chat-added-channel"); //チャンネル名変更
+channel.listen("ChatAdded", function (data) {
+    //イベント名変更
+    console.log("received");
+    console.log(data);
+});

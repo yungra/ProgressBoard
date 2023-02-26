@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ChatRoom;
 use App\Models\Teacher;
 use App\Models\Message;
+use App\Events\ChatAdded;
 
 class ChatController extends Controller
 {
 
     public function show($id)
     {
+
         $chat_room = ChatRoom::where('teacher_id', '=', $id)
             ->where('student_id', '=', Auth::id())
             ->with('messages', 'student', 'teacher')
@@ -47,6 +49,14 @@ class ChatController extends Controller
         $chat_room_id = $chat_room->id;
 
         $content = $request->message;
+
+        //pusher送信用
+        $chat = [
+            'chat_room_id' => $chat_room_id,
+            'is_student' => 1,
+            'content' => $content,
+        ];
+        event(new ChatAdded($chat));
 
         Message::create([
             'chat_room_id' => $chat_room_id,

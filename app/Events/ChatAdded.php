@@ -10,18 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TaskAdded implements ShouldBroadcast
+class ChatAdded implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $chat;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($chat)
     {
-        //
+        $this->chat = $chat;
     }
 
     /**
@@ -31,6 +33,6 @@ class TaskAdded implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('task-added-channel');
+        return new Channel('chat-added-channel', $this->chat);
     }
 }
