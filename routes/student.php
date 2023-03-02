@@ -74,6 +74,10 @@ Route::prefix('chat')
         Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
     });
 
+Route::get('/chattest', function () {
+    return view('student.chat.show', ['data' => 1]);
+})->middleware('auth:students');
+
 Route::prefix('todo')
     ->middleware('auth:students')
     ->group(function () {
