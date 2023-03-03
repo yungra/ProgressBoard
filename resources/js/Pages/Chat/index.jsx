@@ -12,6 +12,8 @@ export default function Index() {
     const [chatMessages, setChatMessages] = useState([]);
     const [chatMessage, setChatMessage] = useState("");
 
+    console.log(chatMessages);
+
     // Methods
     const handleMessageChange = (e) => {
         // メッセージ入力したとき
@@ -33,11 +35,10 @@ export default function Index() {
     };
     const getChatMessages = () => {
         // チャットメッセージを取得する
-
-        axios.get(route("student.chat.show", props.data)).then((response) => {
-            const chatMessages = response.data;
-            setChatMessages(chatMessages);
-        });
+        // axios.get(route("student.chat.show", props.data)).then((response) => {
+        //     const chatMessages = response.data;
+        //     setChatMessages(chatMessages);
+        // });
     };
 
     // Effects
@@ -53,17 +54,19 @@ export default function Index() {
             forceTLS: true,
         });
 
-        // ブロードキャスト受信
-        window.Echo.channel("chat-added-channel").listen("ChatAdded", (e) => {
-            console.log(e);
-            getChatMessages(); // ブロードキャスト通知が来たら再読込みする
+        var channel = window.Echo.channel("chat-added-channel"); //チャンネル名変更
+        channel.listen("ChatAdded", function (data) {
+            //イベント名変更
+            // console.log(data.chat.content);
+            setChatMessages([...chatMessages, data.chat.content]);
+            console.log("テスト:" + chatMessages);
         });
     }, []);
 
     return (
         <div className="p-5">
             <h1 className="mb-2 font-bold">
-                Laravel + React + Ably でチャット機能
+                Laravel + React + Pusher でチャット機能
             </h1>
 
             {/* メッセージ部分 */}
