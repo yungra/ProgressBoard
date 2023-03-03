@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 import Echo from "laravel-echo";
+import Pusher from "pusher-js"; //追加
 
 export default function Index() {
     // Data
@@ -45,6 +46,13 @@ export default function Index() {
 
         getChatMessages();
 
+        window.Echo = new Echo({
+            broadcaster: "pusher",
+            key: "7704a90aa1acf69d96d8",
+            cluster: "ap3",
+            forceTLS: true,
+        });
+
         // ブロードキャスト受信
         window.Echo.channel("chat-added-channel").listen("ChatAdded", (e) => {
             console.log(e);
@@ -61,7 +69,7 @@ export default function Index() {
             {/* メッセージ部分 */}
             <div className="p-4 bg-gray-100">
                 {chatMessages.length > 0 &&
-                    chatMessages.map((chatMessage) => (
+                    Object.values(chatMessages).map((chatMessage) => (
                         <div
                             key={chatMessage.id}
                             className="bg-white border mb-2 p-3 rounded"
