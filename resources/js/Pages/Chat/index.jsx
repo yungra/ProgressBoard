@@ -72,15 +72,15 @@ export default function Index() {
             {/* メッセージ部分 */}
             <div className="p-4 bg-gray-100">
                 {chatMessages.length > 0 &&
-                    Object.values(chatMessages).map((chatMessage) => (
+                    Object.values(chatMessages).map((chatMessage, index) => (
                         <div
-                            key={chatMessage.id}
+                            key={index}
                             className="bg-white border mb-2 p-3 rounded"
                         >
                             <div className="whitespace-pre mt-2">
                                 {chatMessage.message}
                             </div>
-                            chatMessage={chatMessage}
+                            チャットメッセージ={chatMessage}
                         </div>
                     ))}
                 {chatMessages.length === 0 && (
@@ -93,7 +93,7 @@ export default function Index() {
             </div>
 
             {/* フォーム部分 */}
-            <div className="py-3">
+            {/* <div className="py-3">
                 <small>&#x1F4AC; チャットへ投稿</small>
                 <textarea
                     rows="4"
@@ -109,7 +109,7 @@ export default function Index() {
                 >
                     送信する
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }
