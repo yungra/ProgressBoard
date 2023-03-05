@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ChatResource extends JsonResource
+class ChatTestResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,9 @@ class ChatResource extends JsonResource
             'id' => $this->id,
             'message' => $this->message,
             'created_at' => $this->created_at,
-            'teacher' => [
-                'name' => $this->teacher->name,
-            ]
-        ];    
+            // 'user' => [
+            //     'name' => $this->user->name,
+            // ]
+        ];
     }
 }

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="index" data-props="{{ json_encode(['data' => $data]) }}"></div>
+    <div id="index" {{-- data-props="{{ json_encode(['data' => $data]) }}" --}}></div>
 </body>
 
 </html>
