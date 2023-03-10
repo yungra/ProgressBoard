@@ -5,13 +5,18 @@ import axios from "axios";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js"; //追加
 import { VStack, Heading, HStack, Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export default function Index() {
+// export default function Index() {
+const Chat = () => {
     // Data
     const element = document.getElementById("index");
-    // const props = JSON.parse(element.dataset.props); // data-propsの内容を取得
+    const props = JSON.parse(element.dataset.props); // data-propsの内容を取得
     const [chatMessages, setChatMessages] = useState([]);
     const [chatMessage, setChatMessage] = useState("");
+    const [studentName, setStudentName] = useState("");
+    const [teacherName, setTeacherName] = useState("");
+    // const navigate = useNavigate();
 
     // Methods
     const handleMessageChange = (e) => {
@@ -23,8 +28,12 @@ export default function Index() {
     const handlerSubmit = () => {
         // 送信したとき
 
-        const url = route("student.chat.store");
-        const data = { message: chatMessage };
+        const url = route("student.realtime_chat.store");
+        const data = {
+            content: chatMessage,
+            chat_room_id: props.chat_room.id,
+            is_student: props.is_student,
+        };
 
         Inertia.post(url, data, {
             onSuccess() {
@@ -40,11 +49,18 @@ export default function Index() {
         //     setChatMessages(chatMessages);
         // });
         const getMessage = async () => {
-            const response = await axios.get(route("student.chat.list"));
-            // console.log("axios:" + typeof response);
+            const response = await axios.get(
+                //現在のchat_roomのidを元に、メッセージデータを取得
+                route("student.realtime_chat.list", props.chat_room.id)
+            );
             // console.log("axiosデータ" + typeof response.data);
-            const chatMessages = response.data;
+            const chatMessages = response.data[0];
+            const studentName = response.data[1];
+            const teacherName = response.data[2];
             setChatMessages(chatMessages);
+            setStudentName(studentName);
+            setTeacherName(teacherName);
+            // console.log("axios:" + JSON.stringify(chatMessages));
         };
         getMessage();
     };
@@ -66,7 +82,7 @@ export default function Index() {
         channel.listen("ChatAdded", function (data) {
             //イベント名変更
             // setChatMessages([...chatMessages, data.chat.content]);
-            console.log("テスト:" + data.chat.content);
+            // console.log("テスト:" + data.chat.content);
 
             getChatMessages(); // ブロードキャスト通知が来たら再読込みする
         });
@@ -74,23 +90,37 @@ export default function Index() {
 
     return (
         <div className="p-5">
-            <h1 className="mb-2 font-bold">
-                Laravel + React + Pusher でチャット機能
-            </h1>
+            {console.log(props.is_student)}
+            {props.is_student ? (
+                <h1 className="mb-2 font-bold">
+                    {teacherName}先生へのメッセージ
+                </h1>
+            ) : (
+                <h1 className="mb-2 font-bold">{studentName}へのメッセージ</h1>
+            )}
 
             {/* メッセージ部分 */}
             <div className="p-4 bg-gray-100">
-                {chatMessages.data !== undefined &&
-                    chatMessages.data.length > 0 &&
-                    chatMessages.data.map((chatMessage, index) => (
+                {console.log(chatMessages.length + ":" + chatMessages.content)}
+                {chatMessages.length > 0 &&
+                    chatMessages.map((chatMessage, index) => (
                         <div
                             key={index}
                             className="bg-white border mb-2 p-3 rounded"
                         >
-                            {console.log("aa" + chatMessage)}
-                            <div className="whitespace-pre mt-2">
-                                チャットメッセージ={chatMessage.message}
-                            </div>
+                            {chatMessage.is_student ? (
+                                <div className="whitespace-pre mt-2">
+                                    送信者={studentName}
+                                    <br />
+                                    チャットメッセージ={chatMessage.content}
+                                </div>
+                            ) : (
+                                <div className="whitespace-pre mt-2">
+                                    送信者={teacherName}
+                                    <br />
+                                    チャットメッセージ={chatMessage.content}
+                                </div>
+                            )}
                         </div>
                     ))}
                 {chatMessages.length === 0 && (
@@ -132,10 +162,21 @@ export default function Index() {
                         送信する
                     </Button>
                 </HStack>
+                <HStack>
+                    <Button
+                        colorScheme="blue"
+                        size="md"
+                        bgColor="white"
+                        variant="outline"
+                        px={7}
+                        ml="12%"
+                        onClick={() => navigate(-1)}
+                    >
+                        戻る
+                    </Button>
+                </HStack>
             </div>
         </div>
     );
-}
-
-const root = ReactDOM.createRoot(document.getElementById("index"));
-root.render(<Index />);
+};
+export default Chat;

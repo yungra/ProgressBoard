@@ -7,12 +7,12 @@
 
     <title>ProgressBoard</title>
     @viteReactRefresh
-    @vite(['resources/css/app.css', 'resources/js/Pages/Chat/Index.jsx'])
+    @vite(['resources/css/app.css', 'resources/js/index.jsx'])
     @routes
 </head>
 
 <body>
-    <div id="index" {{-- data-props="{{ json_encode(['data' => $data]) }}" --}}></div>
+    <div id="index" data-props="{{ json_encode(['chat_room' => $chat_room, 'is_student' => 1]) }}"></div>
 </body>
 
 </html>

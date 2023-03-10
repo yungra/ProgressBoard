@@ -31,9 +31,8 @@ class ChatController extends Controller
             ]);
         }
 
-
-        $teacher = Teacher::where('id', '=', $id)->first();
-        $messages = Message::get();
+        // $teacher = Teacher::where('id', '=', $id)->first();
+        // $messages = Message::get();
         return view('student.chats.show', compact('chat_room'));
     }
 
