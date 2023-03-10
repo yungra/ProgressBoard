@@ -27,8 +27,8 @@ class RealtimeChatController extends Controller
             // 存在する場合はスルー;
         } else {
             $chat_room = ChatRoom::create([
-                'teacher_id' => $id,
-                'student_id' => Auth::id(),
+                'teacher_id' => Auth::id(),
+                'student_id' => $id,
             ]);
         }
 
@@ -71,7 +71,10 @@ class RealtimeChatController extends Controller
 
         ChatAdded::dispatch($chat_message); // ブロードキャストを実行
 
-        // return to_route('student.realtime_chat.index', ['id' => $request->chat_room_id]); // リダイレクト
-        return redirect('teacher.realtime_chat.index', ['id' => $request->chat_room_id]); // リダイレクト
+        $chat_room = ChatRoom::where('id', '=', $request->chat_room_id)
+            // ->with('messages', 'student', 'teacher')
+            ->first();
+
+        return view('teacher.realtime_chat.show', ['chat_room' => $chat_room]); // リダイレクト
     }
 }

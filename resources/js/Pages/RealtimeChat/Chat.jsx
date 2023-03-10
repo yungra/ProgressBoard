@@ -28,7 +28,11 @@ const Chat = () => {
     const handlerSubmit = () => {
         // 送信したとき
 
-        const url = route("student.realtime_chat.store");
+        console.log("ハンドルだよ");
+        let url = route("student.realtime_chat.store");
+        if (!props.is_student) {
+            url = route("teacher.realtime_chat.store");
+        }
         const data = {
             content: chatMessage,
             chat_room_id: props.chat_room.id,
@@ -41,7 +45,7 @@ const Chat = () => {
             },
         });
     };
-    const getChatMessages = () => {
+    const getStudentChatMessages = () => {
         // チャットメッセージを取得する
         // axios.get(route("student.chat.list")).then((response) => {
         //     console.log("データ" + response);
@@ -53,6 +57,27 @@ const Chat = () => {
                 //現在のchat_roomのidを元に、メッセージデータを取得
                 route("student.realtime_chat.list", props.chat_room.id)
             );
+            const chatMessages = response.data[0];
+            const studentName = response.data[1];
+            const teacherName = response.data[2];
+            setChatMessages(chatMessages);
+            setStudentName(studentName);
+            setTeacherName(teacherName);
+        };
+        getMessage();
+    };
+    const getTeacherChatMessages = () => {
+        // チャットメッセージを取得する
+        // axios.get(route("student.chat.list")).then((response) => {
+        //     console.log("データ" + response);
+        //     const chatMessages = response.data;
+        //     setChatMessages(chatMessages);
+        // });
+        const getMessage = async () => {
+            const response = await axios.get(
+                //現在のchat_roomのidを元に、メッセージデータを取得
+                route("teacher.realtime_chat.list", props.chat_room.id)
+            );
             // console.log("axiosデータ" + typeof response.data);
             const chatMessages = response.data[0];
             const studentName = response.data[1];
@@ -60,7 +85,6 @@ const Chat = () => {
             setChatMessages(chatMessages);
             setStudentName(studentName);
             setTeacherName(teacherName);
-            // console.log("axios:" + JSON.stringify(chatMessages));
         };
         getMessage();
     };
@@ -69,7 +93,11 @@ const Chat = () => {
     useEffect(() => {
         // ページを読み込んだ時
 
-        getChatMessages();
+        if (props.is_student) {
+            getStudentChatMessages();
+        } else {
+            getTeacherChatMessages();
+        }
 
         window.Echo = new Echo({
             broadcaster: "pusher",
@@ -84,13 +112,17 @@ const Chat = () => {
             // setChatMessages([...chatMessages, data.chat.content]);
             // console.log("テスト:" + data.chat.content);
 
-            getChatMessages(); // ブロードキャスト通知が来たら再読込みする
+            // ブロードキャスト通知が来たら再読込みする
+            if (props.is_student) {
+                getStudentChatMessages();
+            } else {
+                getTeacherChatMessages();
+            }
         });
     }, []);
 
     return (
         <div className="p-5">
-            {console.log(props.is_student)}
             {props.is_student ? (
                 <h1 className="mb-2 font-bold">
                     {teacherName}先生へのメッセージ
@@ -101,7 +133,6 @@ const Chat = () => {
 
             {/* メッセージ部分 */}
             <div className="p-4 bg-gray-100">
-                {console.log(chatMessages.length + ":" + chatMessages.content)}
                 {chatMessages.length > 0 &&
                     chatMessages.map((chatMessage, index) => (
                         <div
