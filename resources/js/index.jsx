@@ -1,14 +1,14 @@
 import "./bootstrap";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
-import Index from "./Pages/RealtimeChat/Chat";
+import Chat from "./Pages/RealtimeChat/Chat";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function index() {
+function Index() {
     return (
         <Router>
             <ChakraProvider>
-                <Index />
+                <Chat />
             </ChakraProvider>
         </Router>
     );

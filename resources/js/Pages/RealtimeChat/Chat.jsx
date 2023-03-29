@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 // export default function Index() {
 const Chat = () => {
+    const navigate = useNavigate();
+
     // Data
     const element = document.getElementById("index");
     const props = JSON.parse(element.dataset.props); // data-propsの内容を取得
@@ -200,7 +202,7 @@ const Chat = () => {
                         bgColor="white"
                         variant="outline"
                         px={7}
-                        ml="12%"
+                        mt="12"
                         onClick={() => navigate(-1)}
                     >
                         戻る
