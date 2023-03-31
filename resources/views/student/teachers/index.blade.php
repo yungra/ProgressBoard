@@ -79,6 +79,11 @@
                                                             onclick="location.href='{{ route('student.chat.show', $teacher->id) }}'"
                                                             class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
                                                     </td>
+                                                    <td class="px-4 text-center">
+                                                        <button
+                                                            onclick="location.href='{{ route('student.realtime_chat.index', $teacher->id) }}'"
+                                                            class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">リアルタイムチャット</button>
+                                                    </td>
                                                 </tr>
                                                 @continue
                                                 {{-- ページ内で、一部が条件を満たす場合 --}}
@@ -102,6 +107,11 @@
                                                                 onclick="location.href='{{ route('student.chat.show', $teacher->id) }}'"
                                                                 class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
                                                         </td>
+                                                        <td class="px-4 text-center">
+                                                            <button
+                                                                onclick="location.href='{{ route('student.realtime_chat.index', $teacher->id) }}'"
+                                                                class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">リアルタイムチャット</button>
+                                                        </td>
                                                     </tr>
                                                     @continue
                                                 @endif
@@ -122,6 +132,11 @@
                                                     <button
                                                         onclick="location.href='{{ route('student.chat.show', $teacher->id) }}'"
                                                         class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">チャット</button>
+                                                </td>
+                                                <td class="px-4 text-center">
+                                                    <button
+                                                        onclick="location.href='{{ route('student.realtime_chat.index', $teacher->id) }}'"
+                                                        class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded">リアルタイムチャット</button>
                                                 </td>
                                             </tr>
                                         @endforeach

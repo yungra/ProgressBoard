@@ -14,6 +14,8 @@ use App\Http\Controllers\Student\Auth\VerifyEmailController;
 use App\Http\Controllers\Student\TeachersController;
 use App\Http\Controllers\Student\GuidanceReportsController;
 use App\Http\Controllers\Student\ChatController;
+use App\Http\Controllers\Student\ChatTestController;
+use App\Http\Controllers\Student\RealtimeChatController;
 use App\Http\Controllers\Student\MyinfoController;
 use App\Http\Controllers\Student\QuestionnaireController;
 use App\Http\Controllers\Student\TodoController;
@@ -73,6 +75,29 @@ Route::prefix('chat')
         // Route::get('add/{id}', [ChatController::class, 'add'])->name('chat.add');
         Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
     });
+
+Route::prefix('chattest')
+    ->middleware('auth:students')
+    ->group(function () {
+        Route::get('index', [ChatTestController::class, 'index'])->name('chat.index');
+        Route::get('list', [ChatTestController::class, 'list'])->name('chat.list');
+        Route::post('store', [ChatTestController::class, 'store'])->name('chat.store');
+    });
+
+Route::prefix('realtime_chat')
+    ->middleware('auth:students')
+    ->group(function () {
+        Route::get('index/{id}', [RealtimeChatController::class, 'index'])->name('realtime_chat.index');
+        Route::get('list/{id}', [RealtimeChatController::class, 'list'])->name('realtime_chat.list');
+        Route::post('store', [RealtimeChatController::class, 'store'])->name('realtime_chat.store');
+    });
+
+Route::get('/chattest', function () {
+    return view(
+        'student.chat.show'
+        // , ['data' => 1]
+    );
+})->middleware('auth:students');
 
 Route::prefix('todo')
     ->middleware('auth:students')

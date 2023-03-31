@@ -16,6 +16,7 @@ use App\Http\Controllers\Teacher\StudentsController;
 use App\Http\Controllers\Teacher\MyinfoController;
 use App\Http\Controllers\Teacher\GuidanceReportsController;
 use App\Http\Controllers\Teacher\ChatController;
+use App\Http\Controllers\Teacher\RealtimeChatController;
 use App\Http\Controllers\Teacher\QuestionnaireController;
 use App\Http\Controllers\Teacher\NoticeController;
 
@@ -56,6 +57,14 @@ Route::prefix('chat')
     ->group(function () {
         Route::get('show/{id}', [ChatController::class, 'show'])->name('chat.show');
         Route::post('send/{id}', [ChatController::class, 'send'])->name('chat.send');
+    });
+
+Route::prefix('realtime_chat')
+    ->middleware('auth:teachers')
+    ->group(function () {
+        Route::get('index/{id}', [RealtimeChatController::class, 'index'])->name('realtime_chat.index');
+        Route::get('list/{id}', [RealtimeChatController::class, 'list'])->name('realtime_chat.list');
+        Route::post('store', [RealtimeChatController::class, 'store'])->name('realtime_chat.store');
     });
 
 Route::prefix('questionnaire')
